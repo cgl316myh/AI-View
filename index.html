@@ -363,15 +363,15 @@
       <div class="tab-shell">
         <div class="tab-bar" role="tablist" aria-label="按 Agent 切换">
           <button type="button" class="tab-btn" role="tab" id="tab-pay" data-tab="pay" aria-controls="panel-pay" aria-selected="true"><span class="tab-text">对照表<span class="tab-sub">总览 · 默认</span></span></button>
-          <button type="button" class="tab-btn has-update" role="tab" id="tab-deepseek" data-tab="deepseek" aria-controls="panel-deepseek" aria-selected="false" tabindex="-1"><span class="tab-text">DeepSeek<span class="tab-sub">模型</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
-          <button type="button" class="tab-btn has-update" role="tab" id="tab-harness" data-tab="harness" aria-controls="panel-harness" aria-selected="false" tabindex="-1"><span class="tab-text">Harness<span class="tab-sub">DeepSeek · dsh</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
-          <button type="button" class="tab-btn has-update" role="tab" id="tab-cursor" data-tab="cursor" aria-controls="panel-cursor" aria-selected="false" tabindex="-1"><span class="tab-text">Cursor<span class="tab-sub">编辑器</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
+          <button type="button" class="tab-btn has-update" role="tab" id="tab-deepseek" data-tab="deepseek" data-update="2026-10-17" aria-controls="panel-deepseek" aria-selected="false" tabindex="-1"><span class="tab-text">DeepSeek<span class="tab-sub">模型</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
+          <button type="button" class="tab-btn has-update" role="tab" id="tab-harness" data-tab="harness" data-update="2026-10-17" aria-controls="panel-harness" aria-selected="false" tabindex="-1"><span class="tab-text">Harness<span class="tab-sub">DeepSeek · dsh</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
+          <button type="button" class="tab-btn has-update" role="tab" id="tab-cursor" data-tab="cursor" data-update="2026-10-12" aria-controls="panel-cursor" aria-selected="false" tabindex="-1"><span class="tab-text">Cursor<span class="tab-sub">编辑器</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
           <button type="button" class="tab-btn" role="tab" id="tab-codex" data-tab="codex" aria-controls="panel-codex" aria-selected="false" tabindex="-1"><span class="tab-text">Codex<span class="tab-sub">OpenAI</span></span></button>
-          <button type="button" class="tab-btn has-update" role="tab" id="tab-antigravity" data-tab="antigravity" aria-controls="panel-antigravity" aria-selected="false" tabindex="-1"><span class="tab-text">Antigravity<span class="tab-sub">Google</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
-          <button type="button" class="tab-btn has-update" role="tab" id="tab-workbuddy" data-tab="workbuddy" aria-controls="panel-workbuddy" aria-selected="false" tabindex="-1"><span class="tab-text">WorkBuddy<span class="tab-sub">腾讯</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
-          <button type="button" class="tab-btn has-update" role="tab" id="tab-hermes" data-tab="hermes" aria-controls="panel-hermes" aria-selected="false" tabindex="-1"><span class="tab-text">Hermes<span class="tab-sub">Nous</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
+          <button type="button" class="tab-btn has-update" role="tab" id="tab-antigravity" data-tab="antigravity" data-update="2026-11-18" aria-controls="panel-antigravity" aria-selected="false" tabindex="-1"><span class="tab-text">Antigravity<span class="tab-sub">Google</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
+          <button type="button" class="tab-btn has-update" role="tab" id="tab-workbuddy" data-tab="workbuddy" data-update="2026-09-10" aria-controls="panel-workbuddy" aria-selected="false" tabindex="-1"><span class="tab-text">WorkBuddy<span class="tab-sub">腾讯</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
+          <button type="button" class="tab-btn has-update" role="tab" id="tab-hermes" data-tab="hermes" data-update="2026-11-19" aria-controls="panel-hermes" aria-selected="false" tabindex="-1"><span class="tab-text">Hermes<span class="tab-sub">Nous</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
         </div>
-        <p class="tab-legend"><span><span class="lg-dot"></span><strong>红点 +「更新」</strong> = 该 Agent 本期有新版本、价格或规则变化，点开后顶部有更新说明；无标记 = 本期无重大变化（本期仅 Codex）。</span><span>另见下方：<a href="#tldr">速览</a> · <a href="#follow">持续跟进</a> · <a href="#open">存疑事项</a></span></p>
+        <p class="tab-legend"><span><span class="lg-dot"></span><strong>红点 +「更新」</strong> = 该 Agent 本期有新版本、价格或规则变化，点开看过后标记即消失；无标记 = 本期无重大变化或已看过（本期仅 Codex 无更新）。</span><span>另见下方：<a href="#tldr">速览</a> · <a href="#follow">持续跟进</a> · <a href="#open">存疑事项</a></span></p>
 
       <!-- ============ DeepSeek ============ -->
       <section class="tool tab-panel" id="panel-deepseek" data-panel="deepseek" role="tabpanel" aria-labelledby="tab-deepseek" tabindex="0">
@@ -947,9 +947,47 @@
         var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"][data-tab]'));
         var panels = {};
         document.querySelectorAll('[data-panel]').forEach(function (pl) { panels[pl.getAttribute('data-panel')] = pl; });
+        // ---- seen state: remembered per browser, keyed by each tab's update stamp ----
+        // A tab counts as seen when the stored stamp matches its current data-update
+        // value; a future refresh that bumps data-update makes the marker light up again.
+        var SEEN_KEY = 'ai-view-seen-updates';
+        var seen = (function () {
+          try {
+            var raw = window.localStorage.getItem(SEEN_KEY);
+            var parsed = raw ? JSON.parse(raw) : null;
+            return (parsed && typeof parsed === 'object') ? parsed : {};
+          } catch (e) { return {}; }
+        })();
+        function saveSeen() {
+          try { window.localStorage.setItem(SEEN_KEY, JSON.stringify(seen)); } catch (e) {}
+        }
+        function markSeen(id) {
+          var t = document.querySelector('[data-tab="' + id + '"]');
+          if (!t) return;
+          var stamp = t.getAttribute('data-update');
+          if (!stamp) return;
+          if (seen[id] !== stamp) { seen[id] = stamp; saveSeen(); }
+        }
+        function clearUpdateMark(id) {
+          var t = document.querySelector('[data-tab="' + id + '"]');
+          if (!t || !t.classList.contains('has-update')) return;
+          t.classList.remove('has-update');
+          var dot = t.querySelector('.tab-dot');
+          if (dot) dot.parentNode.removeChild(dot);
+          var tag = t.querySelector('.tab-new');
+          if (tag) tag.parentNode.removeChild(tag);
+        }
+        // On load: tabs already viewed in this browser start with no marker.
+        tabs.forEach(function (t) {
+          var id = t.getAttribute('data-tab');
+          var stamp = t.getAttribute('data-update');
+          if (stamp && seen[id] === stamp) clearUpdateMark(id);
+        });
         function activate(id, opts) {
           opts = opts || {};
           if (!panels[id]) id = 'pay';
+          clearUpdateMark(id);
+          markSeen(id);
           tabs.forEach(function (t) {
             var on = t.getAttribute('data-tab') === id;
             t.setAttribute('aria-selected', on ? 'true' : 'false');
@@ -984,10 +1022,14 @@
         }
         window.addEventListener('hashchange', fromHash);
         fromHash();
-        // expose for future snapshot refreshes: markUpdated('cursor') adds the red marker
-        window.__markAgentUpdated = function (id) {
+        // expose for future snapshot refreshes: __markAgentUpdated('cursor', '2026-12-01')
+        // sets a new update stamp (so the marker lights again even for past viewers) and adds the red marker
+        window.__markAgentUpdated = function (id, stamp) {
           var t = document.querySelector('[data-tab="' + id + '"]');
-          if (!t || t.classList.contains('has-update')) return;
+          if (!t) return;
+          if (stamp) t.setAttribute('data-update', stamp);
+          if (seen[id] !== undefined) { delete seen[id]; saveSeen(); }
+          if (t.classList.contains('has-update')) return;
           t.classList.add('has-update');
           var dot = document.createElement('span'); dot.className = 'tab-dot'; dot.setAttribute('aria-hidden', 'true');
           var tag = document.createElement('span'); tag.className = 'tab-new'; tag.textContent = '更新';
