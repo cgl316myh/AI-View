@@ -344,6 +344,49 @@
         .tab-btn { flex: 0 0 auto; padding: 9px 12px; font-size: 13.5px; min-height: 40px; border-radius: 8px; }
         .update-banner .u-date { margin-left: 0; }
       }
+      /* ---------- other tab: sidebar + detail ---------- */
+      .other-layout { display: grid; grid-template-columns: 228px minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 18px; }
+      .other-side {
+        position: sticky; top: 84px;
+        background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+        padding: 10px; display: flex; flex-direction: column; gap: 2px;
+      }
+      .other-side-title { font-size: 12.5px; color: var(--ink-3); padding: 4px 10px 8px; letter-spacing: .02em; }
+      .other-btn {
+        appearance: none; border: 0; background: transparent; color: var(--ink-2);
+        font-family: inherit; cursor: pointer; text-align: left;
+        display: flex; align-items: baseline; gap: 8px; width: 100%;
+        padding: 9px 10px; border-radius: 6px; font-size: 14.5px; line-height: 1.4; min-height: 40px;
+      }
+      .other-btn .o-name { font-weight: 500; }
+      .other-btn .o-sub { font-size: 12px; color: var(--ink-3); margin-left: auto; text-align: right; flex: none; }
+      .other-btn .o-flag { flex: none; font-size: 10.5px; font-weight: 700; line-height: 1.5; padding: 1px 6px; border-radius: 999px; color: var(--amber); border: 1px solid var(--amber); background: var(--amber-soft); }
+      .other-btn:hover { background: var(--surface-2); color: var(--ink); }
+      .other-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+      .other-btn[aria-selected="true"] { background: var(--bg); color: var(--ink); box-shadow: 0 0 0 1px var(--line), inset 3px 0 0 var(--accent); }
+      .other-btn[aria-selected="true"] .o-name { font-weight: 700; }
+      .other-detail { display: none; min-width: 0; }
+      .other-detail.active { display: block; }
+      @media (prefers-reduced-motion: no-preference) {
+        .other-detail.active { animation: tabIn .18s ease-out; }
+      }
+      .other-detail .tool-head h3 {
+        font-family: "Noto Serif SC", serif; font-weight: 700;
+        font-size: clamp(21px, 4vw, 26px); margin: 0; line-height: 1.3;
+      }
+      @media (max-width: 760px) {
+        .other-layout { grid-template-columns: 1fr; gap: 18px; }
+        .other-side {
+          position: static; flex-direction: row; flex-wrap: wrap; gap: 6px; padding: 10px;
+        }
+        .other-side-title { flex: 0 0 100%; padding: 2px 4px 4px; }
+        .other-btn {
+          flex: 1 1 calc(50% - 6px); width: auto; align-items: center;
+          border: 1px solid var(--line); background: var(--bg); padding: 8px 10px;
+        }
+        .other-btn .o-sub { display: none; }
+        .other-btn[aria-selected="true"] { box-shadow: 0 0 0 1px var(--accent), inset 3px 0 0 var(--accent); }
+      }
       footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); }
       footer h2 { font-family: "Noto Serif SC", serif; font-size: 18px; margin: 0 0 10px; }
       footer ul { padding-left: 1.2em; font-size: 13.5px; color: var(--ink-2); }
@@ -357,7 +400,7 @@
       <header>
         <div class="dateline">数据核查于 2026-11-22 · 静态快照，打开后不会自动更新</div>
         <h1>你常用的 AI 编程工具，<br />到 2026 年 11 月变成了什么样</h1>
-        <p class="lede">覆盖 DeepSeek 模型与 Harness、Cursor、Codex、Antigravity、WorkBuddy、Hermes 七项。先说最重要的一条：<strong>你说的「DeepSeek V4.1 Flash」是官方正式名</strong>，当前线上版本是 10 月 17 日的检查点 V4.1-Flash-1017，API 模型名 <code>deepseek-flash</code>，也是目前性价比最高的编程模型之一。</p>
+        <p class="lede">覆盖 DeepSeek 模型与 Harness、Cursor、Codex、Antigravity、WorkBuddy、Hermes 七项，另在「其他」页收了 Kimi、GLM、Qwen、Trae、MiniMax、文心 / Comate、Claude Code、Copilot、Windsurf、Cline / Roo Code、Aider / OpenHands、Kiro 共 12 条。先说最重要的一条：<strong>你说的「DeepSeek V4.1 Flash」是官方正式名</strong>，当前线上版本是 10 月 17 日的检查点 V4.1-Flash-1017，API 模型名 <code>deepseek-flash</code>，也是目前性价比最高的编程模型之一。</p>
       </header>
 
       <div class="tab-shell">
@@ -370,6 +413,7 @@
           <button type="button" class="tab-btn has-update" role="tab" id="tab-antigravity" data-tab="antigravity" data-update="2026-11-18" aria-controls="panel-antigravity" aria-selected="false" tabindex="-1"><span class="tab-text">Antigravity<span class="tab-sub">Google</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
           <button type="button" class="tab-btn has-update" role="tab" id="tab-workbuddy" data-tab="workbuddy" data-update="2026-09-10" aria-controls="panel-workbuddy" aria-selected="false" tabindex="-1"><span class="tab-text">WorkBuddy<span class="tab-sub">腾讯</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
           <button type="button" class="tab-btn has-update" role="tab" id="tab-hermes" data-tab="hermes" data-update="2026-11-19" aria-controls="panel-hermes" aria-selected="false" tabindex="-1"><span class="tab-text">Hermes<span class="tab-sub">Nous</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
+          <button type="button" class="tab-btn has-update" role="tab" id="tab-other" data-tab="other" data-update="2026-11-22" aria-controls="panel-other" aria-selected="false" tabindex="-1"><span class="tab-text">其他<span class="tab-sub">12 条 · 侧边栏</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
         </div>
         <p class="tab-legend"><span><span class="lg-dot"></span><strong>红点 +「更新」</strong> = 该 Agent 本期有新版本、价格或规则变化，点开看过后标记即消失；无标记 = 本期无重大变化或已看过（本期仅 Codex 无更新）。</span><span>另见下方：<a href="#tldr">速览</a> · <a href="#follow">持续跟进</a> · <a href="#open">存疑事项</a></span></p>
 
@@ -611,6 +655,243 @@
           <li><strong>与 OpenClaw 的关系：</strong>两者是直接竞品（OpenClaw 前身 Clawdbot/Moltbot，现归 OpenClaw Foundation），同为 MIT 的常开型个人 agent。Hermes 自带 <code>hermes migrate openclaw</code> 一键迁移，Nous 还提供托管的 Hermes Cloud（付费 Portal 套餐含一个常开 agent）；OpenClaw 没有托管/付费层，也提供反向迁移。据 Nous 与社区说法，2026 年春有不少用户从 OpenClaw 迁到 Hermes。</li>
         </ul>
         <p class="src">来源：<a href="https://github.com/NousResearch/hermes-agent/releases/tag/v0.23.3">GitHub 发布页 v0.23.3</a> · <a href="https://github.com/NousResearch/hermes-agent/releases">Hermes Agent 全部发布</a> · <a href="https://hermes-agent.nousresearch.com/compare/openclaw">Nous 官方 OpenClaw 对比页</a> · <a href="https://www.ertas.ai/blog/hermes-agent-vs-hermes-4">模型与 Agent 的区别说明</a></p>
+      </section>
+
+      <!-- ============ Other ============ -->
+      <section class="tool tab-panel" id="panel-other" data-panel="other" role="tabpanel" aria-labelledby="tab-other" tabindex="0">
+        <div class="tool-head">
+          <h2>其他模型与 Agent</h2><span class="en">主流七项之外的 12 条 · 核查于 2026-11-22</span>
+        </div>
+        <p class="verdict">结论：<strong>国内四家在 2026 年 10–11 月集体换了旗舰</strong>（Kimi K3.1 Pro、GLM-5.3、Qwen4-Max、MiniMax M3.1-Flash）；海外那边 Windsurf 已更名 Devin Desktop、通义灵码已更名 Qoder CN；<strong>Roo Code 已停运、Aider 已基本停更</strong>。左边点名字，右边看它现在的最新情况。</p>
+
+        <div class="other-layout">
+          <div class="other-side" role="tablist" aria-label="其他模型与 Agent 列表">
+            <div class="other-side-title">模型 / Agent（12）</div>
+            <button type="button" class="other-btn" role="tab" id="otab-kimi" data-other="kimi" aria-controls="odetail-kimi" aria-selected="true"><span class="o-name">Kimi</span><span class="o-sub">月之暗面</span></button>
+            <button type="button" class="other-btn" role="tab" id="otab-glm" data-other="glm" aria-controls="odetail-glm" aria-selected="false" tabindex="-1"><span class="o-name">GLM</span><span class="o-sub">智谱</span></button>
+            <button type="button" class="other-btn" role="tab" id="otab-qwen" data-other="qwen" aria-controls="odetail-qwen" aria-selected="false" tabindex="-1"><span class="o-name">Qwen</span><span class="o-sub">阿里</span></button>
+            <button type="button" class="other-btn" role="tab" id="otab-trae" data-other="trae" aria-controls="odetail-trae" aria-selected="false" tabindex="-1"><span class="o-name">豆包 / Trae</span><span class="o-sub">字节</span></button>
+            <button type="button" class="other-btn" role="tab" id="otab-minimax" data-other="minimax" aria-controls="odetail-minimax" aria-selected="false" tabindex="-1"><span class="o-name">MiniMax</span><span class="o-sub">M 系列</span></button>
+            <button type="button" class="other-btn" role="tab" id="otab-ernie" data-other="ernie" aria-controls="odetail-ernie" aria-selected="false" tabindex="-1"><span class="o-name">文心 / Comate</span><span class="o-sub">百度</span></button>
+            <button type="button" class="other-btn" role="tab" id="otab-claude" data-other="claude" aria-controls="odetail-claude" aria-selected="false" tabindex="-1"><span class="o-name">Claude Code</span><span class="o-sub">Anthropic</span></button>
+            <button type="button" class="other-btn" role="tab" id="otab-copilot" data-other="copilot" aria-controls="odetail-copilot" aria-selected="false" tabindex="-1"><span class="o-name">Copilot</span><span class="o-sub">GitHub</span></button>
+            <button type="button" class="other-btn" role="tab" id="otab-windsurf" data-other="windsurf" aria-controls="odetail-windsurf" aria-selected="false" tabindex="-1"><span class="o-name">Windsurf</span><span class="o-flag">已更名</span></button>
+            <button type="button" class="other-btn" role="tab" id="otab-cline" data-other="cline" aria-controls="odetail-cline" aria-selected="false" tabindex="-1"><span class="o-name">Cline / Roo Code</span><span class="o-flag">Roo 已停运</span></button>
+            <button type="button" class="other-btn" role="tab" id="otab-aider" data-other="aider" aria-controls="odetail-aider" aria-selected="false" tabindex="-1"><span class="o-name">Aider / OpenHands</span><span class="o-flag">Aider 停更</span></button>
+            <button type="button" class="other-btn" role="tab" id="otab-kiro" data-other="kiro" aria-controls="odetail-kiro" aria-selected="false" tabindex="-1"><span class="o-name">Kiro / Devin</span><span class="o-sub">AWS · Cognition</span></button>
+          </div>
+
+          <div class="other-main">
+
+            <article class="other-detail active" id="odetail-kimi" data-other-panel="kimi" role="tabpanel" aria-labelledby="otab-kimi" tabindex="0">
+              <div class="tool-head"><h3>Kimi</h3><span class="en">Moonshot AI（月之暗面）· 开源权重模型 + Kimi Code 编程 agent</span></div>
+              <p class="verdict">最新：<strong>Kimi K3.1 Pro，2026-10-23 上线</strong>（App / API / Kimi Code），开源权重 11 月 4 日上 Hugging Face。</p>
+              <dl class="facts">
+                <div class="fact"><dt>最新模型</dt><dd>K3.1 Pro <small>2.8T 总参 / 104B 激活 MoE，1M 上下文，原生视觉</small></dd></div>
+                <div class="fact"><dt>API 价格</dt><dd>$2 / $10 <small>每百万 token，缓存命中 $0.20；Highspeed 版 $4 / $20</small></dd></div>
+                <div class="fact"><dt>国内可用</dt><dd>✓ 国内厂商 <small>platform.moonshot.cn / kimi.com，人民币计价（如 K3 ¥20 / ¥100）</small></dd></div>
+              </dl>
+              <ul class="points">
+                <li>2026 年的节奏：6 月 12 日先出编程专长版 K2.7-Code（1T / 32B 激活，256K，$0.95 / $4.00），7 月 16 日旗舰 K3（权重 7 月 26–27 日放出），10 月的 K3.1 Pro 是 K3 的后训练版。</li>
+                <li>Moonshot 自报 K3.1 Pro 在 Terminal-Bench 4.0 上 65.7%，接近 Claude Opus 5.5 的 66.4%——厂商口径，未独立复现。</li>
+                <li><strong>Kimi Code 已存在</strong>：CLI、VS Code 插件、桌面端三形态，由 K3.1 Pro 驱动，会员 Plus 起包含。</li>
+                <li>价格：会员 Plus 年付折合 $15/月（月付 $19）起，有免费层；国内走人民币路线，支付宝 / 微信为国内平台的通常方式，但<strong>官方页面未逐项核实支付方式清单</strong>。</li>
+              </ul>
+              <p class="src">来源：<a href="https://www.kimi.com/code/en">Kimi Code 官网</a> · <a href="https://www.kimi.com/membership/pricing?from=upgrade_home&amp;tab=api&amp;data_source=tracer&amp;tr_param1=kimi%20code%E4%BD%BF%E7%94%A8">Kimi 会员 / API 定价页</a> · <a href="https://techkit.cloud/kimi-k3-1-pro-open-weights-2026-11-05/">TechKit（K3.1 Pro 日期）</a> · <a href="https://artificialwatch.com/model/kimi-k3-1">ArtificialWatch 模型页</a></p>
+            </article>
+
+            <article class="other-detail" id="odetail-glm" data-other-panel="glm" role="tabpanel" aria-labelledby="otab-glm" tabindex="0">
+              <div class="tool-head"><h3>GLM</h3><span class="en">智谱 AI / Z.ai · GLM 模型 + GLM Coding Plan + ZCode + CodeGeeX</span></div>
+              <p class="verdict">最新：<strong>GLM-5.3，2026-08-14</strong>；另有 GLM-5.3-Flash（11 月 19 日官方发文）。</p>
+              <dl class="facts">
+                <div class="fact"><dt>最新模型</dt><dd>GLM-5.3 <small>与 5.2 同底座、靠扩大后训练；权重约 8 月 28 日放出，为定制许可证（非 MIT）</small></dd></div>
+                <div class="fact"><dt>API 价格</dt><dd>$1.40 / $4.40 <small>GLM-5.3 与 5.2 同价</small></dd></div>
+                <div class="fact"><dt>Coding Plan</dt><dd>Lite $18 / Pro $80 / Max $168 <small>每月；年付 −30%</small></dd></div>
+                <div class="fact"><dt>国内可用</dt><dd>✓ 国内厂商 <small>bigmodel.cn 人民币路线；z.ai 为美元</small></dd></div>
+              </dl>
+              <ul class="points">
+                <li>前代 GLM-5.2：2026-06-13 进 Coding Plan、06-16 上 API 与权重，MIT 协议，744B / 40B 激活，1M 上下文。</li>
+                <li>GLM-5.3 官方称在 Z.ai Code Bench 上比 5.2 高约 50%，Terminal-Bench 3.0 从 4.6 升到 28.3，CyberGym 84.5%（厂商口径）。</li>
+                <li><strong>计费规则变了：</strong>Coding Plan 已于 2026-07-30 从「按提示次数」改为积分（credits）制。</li>
+                <li><strong>CodeGeeX 还活着</strong>：免费 IDE 插件，v4.5 / CodeGeeX4-ALL-9B，2026 年 11 月核查仍在更新。国内平台的支付宝 / 微信清单未在官方页逐项核实。</li>
+              </ul>
+              <p class="src">来源：<a href="https://z.ai/blog/glm-5.3?ref=runtimewire">Z.ai 官方博客（GLM-5.3）</a> · <a href="https://z.ai/blog/glm-5.3-flash?ref=runtimewire">Z.ai 官方博客（GLM-5.3-Flash）</a> · <a href="https://docs.z.ai/release-notes/new-released">Z.ai 官方发布说明</a> · <a href="https://codersera.com/blog/glm-5-2-release-1m-context-coding-2026/">Codersera（GLM-5.2 梳理）</a></p>
+            </article>
+
+            <article class="other-detail" id="odetail-qwen" data-other-panel="qwen" role="tabpanel" aria-labelledby="otab-qwen" tabindex="0">
+              <div class="tool-head"><h3>Qwen</h3><span class="en">阿里巴巴 · Qwen 模型 + Qwen Code CLI + 通义灵码（现 Qoder CN）</span></div>
+              <p class="verdict">最新编程模型：<strong>Qwen3-Coder-Next，2026-02-03</strong>；最新托管旗舰是 <strong>Qwen4-Max，2026-11-16</strong>。</p>
+              <dl class="facts">
+                <div class="fact"><dt>编程模型</dt><dd>Qwen3-Coder-Next <small>开源权重，80B / 3B 激活，256K，SWE-Bench Verified 约 70.6–71.3%（厂商口径）</small></dd></div>
+                <div class="fact"><dt>托管旗舰</dt><dd>Qwen4-Max <small>2.4T / 71B 激活，1M，原生视觉，$1.50 / $4.50</small></dd></div>
+                <div class="fact"><dt>国内可用</dt><dd>✓ 国内厂商 <small>阿里云国内站，人民币 / 支付宝为标准路线</small></dd></div>
+              </dl>
+              <ul class="points">
+                <li><strong>Qwen Code 1.0 Preview 于 2026-11-11 发布</strong>，并入了 Qoder 的 agent 能力。</li>
+                <li><strong>免费层没了：</strong>Qwen Code 的免费 OAuth 额度已于 2026-04-15 停掉，现在要走阿里云 Coding Plan 付费或自备 API Key。</li>
+                <li><strong>通义灵码已更名 Qoder CN</strong>（2026-05-20），改积分计费：Pro ¥59/月（2,000 积分）、Pro+ ¥169、旗舰 ¥559，团队版 ¥99/席位/月（阿里云计费文档）。</li>
+                <li>注意区分：Qwen4-Max 是通用旗舰（编程能力强），专用编程线仍是 Qwen3-Coder-Next；Coder-Next 一线为 Apache-2.0 开源权重、免费自托管。</li>
+              </ul>
+              <p class="src">来源：<a href="https://www.alibabacloud.com/press-room/alibaba-unveils-cutting-edge-ai-coding-model-qwen3">阿里云官方新闻稿（Qwen3-Coder）</a> · <a href="https://www.alibabacloud.com/help/en/lingma/billing-description">阿里云官方计费文档（灵码 / Qoder CN）</a> · <a href="https://gigazine.net/gsc_news/en/20261116-qwen4-max">Gigazine（Qwen4-Max）</a> · <a href="https://www.scriptbyai.com/qwen-timeline/">ScriptByAI（Qwen 时间线）</a></p>
+            </article>
+
+            <article class="other-detail" id="odetail-trae" data-other-panel="trae" role="tabpanel" aria-labelledby="otab-trae" tabindex="0">
+              <div class="tool-head"><h3>豆包 / Trae</h3><span class="en">字节跳动 · Doubao-Seed-Code 模型（火山引擎 Ark）+ Trae AI IDE</span></div>
+              <p class="verdict">最新编程模型：<strong>Doubao-Seed-2.0-Code，2026-02-14</strong>，至今仍是现行编程专长版。</p>
+              <dl class="facts">
+                <div class="fact"><dt>最新模型</dt><dd>Doubao-Seed-2.0-Code <small>256K 上下文，Ark 模型 ID <code>doubao-seed-2-0-code-preview-260215</code></small></dd></div>
+                <div class="fact"><dt>Trae 版本</dt><dd>国内版约 v3.4.22 <small>2026-11-18（安装包镜像）；国际版约 v3.6.20（11-14）</small></dd></div>
+                <div class="fact"><dt>国内可用</dt><dd>✓ 国内厂商 <small>trae.com.cn 国内版，支付宝 / 微信 / 抖音支付（已核实来源）</small></dd></div>
+              </dl>
+              <ul class="points">
+                <li><strong>没有 Seed 2.1 Code</strong>：Seed 2.1（2026-06-23）只发了 Pro / Turbo，没有编程版，所以 2.0 Code 仍是专长版的现行版本。</li>
+                <li><strong>产品合并：</strong>TraeWork 与 TraeCode 已于 2026-10-09 合并为统一的「全新 TRAE」（Agent + IDE 双模式），SOLO / Agent 模式与 MCP 支持继续扩展。</li>
+                <li><strong>不再是「完全免费」</strong>：改为积分会员制。国内版：免费 ¥0（每月登录送 500 积分）、Lite ¥49（2,000）、Pro ¥99（4,000）、Pro+ ¥239（12,000）、Ultra ¥699（40,000，自动续费 ¥629）。</li>
+                <li>国际版 trae.ai 是另一套账号与计费系统（美元），与国内版不互通。</li>
+              </ul>
+              <p class="src">来源：<a href="https://howaiworks.ai/models/doubao-seed-code/">HowAIWorks（Doubao-Seed-Code）</a> · <a href="https://codepick.dev/en/tool/trae-cn/">CodePick（Trae CN）</a> · <a href="https://aiho.net/coding/ide/trae.html">Aiho（Trae）</a> · <a href="https://exeatlas.com/en/download/trae-cn/">ExeAtlas（Trae CN 版本）</a></p>
+            </article>
+
+            <article class="other-detail" id="odetail-minimax" data-other-panel="minimax" role="tabpanel" aria-labelledby="otab-minimax" tabindex="0">
+              <div class="tool-head"><h3>MiniMax</h3><span class="en">MiniMax（上海）· M 系列模型 + MiniMax Code agent</span></div>
+              <p class="verdict">旗舰：<strong>MiniMax-M3，2026-06-01</strong>；最新 API 模型是 <strong>M3.1-Flash，2026-10-19 转正式版</strong>。</p>
+              <dl class="facts">
+                <div class="fact"><dt>旗舰 M3</dt><dd>428B / 23B 激活 <small>1M 上下文，原生多模态，SWE-Bench Pro 59.0%（厂商口径）</small></dd></div>
+                <div class="fact"><dt>API 价格</dt><dd>M3 $0.30 / $1.20 <small>标价五折长期有效（≤512K）；国内 ¥2.10 / ¥8.40。M3.1-Flash $0.15 / $0.60</small></dd></div>
+                <div class="fact"><dt>国内可用</dt><dd>✓ 国内厂商 <small>国内平台人民币计价；支付宝 / 微信据套餐追踪站，部分未核实</small></dd></div>
+              </dl>
+              <ul class="points">
+                <li><strong>旧模型已退役：</strong>M2.5 / M2.7 于 2026-11-18 下线，流量自动转到 M3.1-Flash——还在用这两个 ID 的要改。</li>
+                <li>M3 的开源权重已于 2026 年 6 月上 Hugging Face。</li>
+                <li><strong>套餐改名：</strong>原 Token Plan 已于 2026-10-15 被 M Plan 取代。国际版 Go $22 / Explore $55 / Build $132 每月；国内版 Go ¥49 / Explore ¥119 / Build ¥469 每月。</li>
+              </ul>
+              <p class="src">来源：<a href="https://www.minimax.io/blog/minimax-m3">MiniMax 官方博客（M3）</a> · <a href="https://whichcodingplan.com/changes/2026-10-26-minimax-m-plan">WhichCodingPlan（M Plan 变更）</a> · <a href="https://routerplus.com/news/minimax-m2-5-m2-7-retired-november-18">RouterPlus（M2.5 / M2.7 退役）</a></p>
+            </article>
+
+            <article class="other-detail" id="odetail-ernie" data-other-panel="ernie" role="tabpanel" aria-labelledby="otab-ernie" tabindex="0">
+              <div class="tool-head"><h3>文心 / Comate</h3><span class="en">百度 · ERNIE（文心）模型（千帆平台）+ Comate（文心快码）</span></div>
+              <p class="verdict">最新：<strong>ERNIE 5.1，2026 年 5 月 8–9 日发布</strong>，在 Create 2026（5 月 13–14 日）铺开；截至 11 月未见更新的旗舰。</p>
+              <dl class="facts">
+                <div class="fact"><dt>最新模型</dt><dd>ERNIE 5.1 <small>由 ERNIE 5.0 裁出的稀疏 MoE（总参约 ⅓、激活约 ½），128K，仅托管、无开源权重</small></dd></div>
+                <div class="fact"><dt>API 价格</dt><dd>$0.59 / $2.65 <small>千帆平台，二手来源报道</small></dd></div>
+                <div class="fact"><dt>国内可用</dt><dd>✓ 国内厂商 <small>百度账号 + 大陆手机号，人民币计费</small></dd></div>
+              </dl>
+              <ul class="points">
+                <li>ERNIE 5.1 发布时 Arena Search 得分 1,223（全球第 4、中文第 1，5 月 9 日口径）。</li>
+                <li>Comate（文心快码）是带 Zulu agent 的编程助手 / AI IDE，个人标准版与专业版可凭百度账号免费使用，企业版按席位人民币计费。</li>
+              </ul>
+              <div class="callout">
+                <p><strong>两处未证实：</strong>① Comate 的确切付费价格——二手来源互相冲突（有说个人 Pro ¥100/月），百度官方文档未公布价格；② 「Comate 已跑在 ERNIE 5.1 上」未见百度正式确认。这两点别按确定结论用。</p>
+              </div>
+              <p class="src">来源：<a href="https://ernie.baidu.com/research/posts/ernie-5.1-0508-release/">ERNIE 官方研究博客（5.1 发布）</a> · <a href="https://codersera.com/blog/baidu-ernie-5-1-launch-2026/">Codersera（ERNIE 5.1）</a> · <a href="https://www.secondtalent.com/resources/chinese-ai-coding-assistants/">SecondTalent（国内编程助手汇总）</a></p>
+            </article>
+
+            <article class="other-detail" id="odetail-claude" data-other-panel="claude" role="tabpanel" aria-labelledby="otab-claude" tabindex="0">
+              <div class="tool-head"><h3>Claude Code</h3><span class="en">Anthropic（美国）· Claude 模型 + Claude Code 终端 / IDE agent</span></div>
+              <p class="verdict">编程日用推荐：<strong>Claude Opus 5.5（2026-09-22）</strong>；工具最新 <strong>Claude Code v2.1.328（2026-11-18）</strong>。</p>
+              <dl class="facts">
+                <div class="fact"><dt>顶配模型</dt><dd>Fable 5.2 / Mythos 5.2 <small>2026-11-09，$8 / $40，1M 上下文</small></dd></div>
+                <div class="fact"><dt>编程主力</dt><dd>Opus 5.5 $4 / $20 <small>另有 Sonnet 5.5（09-28，$2 / $10）、Haiku 5.5（10-07）</small></dd></div>
+                <div class="fact"><dt>订阅</dt><dd>Pro $20/月 <small>年付 $17，含 Claude Code；Max $100；顶档已改名 Ultra $200</small></dd></div>
+                <div class="fact"><dt>国内可用</dt><dd><span class="st no">✗ 官方不支持</span> <small>仅海外卡，无人民币 / 支付宝官方路线</small></dd></div>
+              </dl>
+              <ul class="points">
+                <li>2026 年新增 Fable / Mythos 这一档，位于 Opus 之上；套餐于 10 月 30 日改名：原 Max 20x（$200）改叫 <strong>Ultra</strong>，Max 成为 $100 档。</li>
+                <li>Claude Code v2.1.328（11 月 18 日）：在云平台上对旧模型默认开启 auto 模式（据发布追踪站）。</li>
+                <li><strong>国内状态说死：</strong>Anthropic《支持地区政策》（2026-11-12 生效）的名单里没有中国大陆、香港、澳门——是官方明确不支持，不是换支付方式能绕的。</li>
+              </ul>
+              <p class="src">来源：<a href="https://www.anthropic.com/claude-fable-and-mythos-5-2?ref=hubwiz.com">Anthropic 官方（Fable / Mythos 5.2）</a> · <a href="https://support.anthropic.com/en/articles/8606395-how-large-is-the-anthropic-api-s-context-window">Anthropic 官方支持文档（上下文）</a> · <a href="https://www.agensi.io/learn/claude-model-release-timeline">Agensi（Claude 发布时间线）</a> · <a href="https://gaoaiba.com/en/tutorials/claude-pro-region-billing-cancel-guide/">Gaoaiba（地区与计费指南）</a></p>
+            </article>
+
+            <article class="other-detail" id="odetail-copilot" data-other-panel="copilot" role="tabpanel" aria-labelledby="otab-copilot" tabindex="0">
+              <div class="tool-head"><h3>GitHub Copilot</h3><span class="en">GitHub / 微软 · IDE 补全 / 对话 / agent + Copilot CLI + 云端编程 agent</span></div>
+              <p class="verdict">现状（2026-11）：模型选择器横跨多家，<strong>计费已全面改成 AI Credits 用量制</strong>。</p>
+              <dl class="facts">
+                <div class="fact"><dt>计费</dt><dd>AI Credits <small>$0.01 / credit，按模型与 token 计；付费档补全不限量</small></dd></div>
+                <div class="fact"><dt>个人档</dt><dd>Free $0 / Pro $10 / Pro+ $39 / Max $100 <small>含 credits 分别为 — / 1,500 / 7,000 / 20,000 价值</small></dd></div>
+                <div class="fact"><dt>团队档</dt><dd>Business $19 / Enterprise $39 <small>每席位每月</small></dd></div>
+                <div class="fact"><dt>国内可用</dt><dd><span class="st mid">？ 未证实</span> <small>未找到官方大陆销售 / 人民币渠道；GitHub 计费为美元（卡 / PayPal）</small></dd></div>
+              </dl>
+              <ul class="points">
+                <li><strong>2026-06-01 起</strong>，所有套餐从「高级请求次数」切换为按用量计的 GitHub AI Credits；新 Max 档 5 月 12 日宣布、6 月 1 日生效。</li>
+                <li>模型选择器现含 Claude（Haiku / Sonnet / Opus 5.5、11 月 9 日起 Fable 5.2）、GPT-6 家族、Gemini、Grok 与 Kimi K3；10 月上线 Copilot Fusion / HydraFusion 多模型选项。</li>
+                <li>高档位可把任务委派给第三方 agent（Claude Code、Codex）；云端 agent 可从 issue 直接做到 PR。</li>
+                <li>免费层：每月 2,000 次补全，对话 / agent 受限。</li>
+              </ul>
+              <p class="src">来源：<a href="https://www.datastudios.org/post/github-copilot-pro-vs-github-copilot-pro-plus-comparison">DataStudios（Pro / Pro+ 对比）</a> · <a href="https://www.nocode.mba/articles/github-copilot-pricing">NoCode MBA（Copilot 定价）</a> · <a href="https://tailkits.com/tools/github-copilot/">Tailkits（Copilot）</a></p>
+            </article>
+
+            <article class="other-detail" id="odetail-windsurf" data-other-panel="windsurf" role="tabpanel" aria-labelledby="otab-windsurf" tabindex="0">
+              <div class="tool-head"><h3>Windsurf → Devin Desktop</h3><span class="en">现属 Cognition · AI IDE，品牌已不存在</span></div>
+              <p class="verdict">现状：<strong>Windsurf 已于 2026-06-02 更名 Devin Desktop</strong>，不再有单独的「Windsurf 版本」。</p>
+              <dl class="facts">
+                <div class="fact"><dt>更名</dt><dd>Devin Desktop <small>2026-06-02 随普通更新切换，套餐与设置沿用；windsurf.com 跳转 devin.ai</small></dd></div>
+                <div class="fact"><dt>价格</dt><dd>Free / Pro $20 / Max $200 <small>Teams $80 基础价 + 多数来源称每全席位 $40</small></dd></div>
+                <div class="fact"><dt>国内可用</dt><dd><span class="st mid">？ 未证实</span> <small>未找到官方大陆 offering，美元计费、无人民币路线</small></dd></div>
+              </dl>
+              <ul class="points">
+                <li>更名前最后一站是 Windsurf 2.0（2026 年 4 月，Agent Command Center）。原 Cascade agent 已于 2026-07-01 结束生命周期，由 Devin Local 取代。</li>
+                <li>计费也换了：2026 年 3 月起 credits 改为按日 / 周的 token 配额。</li>
+                <li>2025–26 的归属链：OpenAI 约 30 亿美元收购谈崩（2025-07）→ Google 以 24 亿美元拿下技术授权并挖走创始团队 → <strong>Cognition 收购剩余部分（2025-07-14 宣布，报道约 2.5 亿美元）</strong>。</li>
+              </ul>
+              <p class="src">来源：<a href="https://troiana.net/guides/windsurf/">Troiana（Windsurf 指南）</a> · <a href="https://resources.rework.com/tools/ai-coding/cursor-vs-windsurf">Rework（Cursor vs Windsurf）</a> · <a href="https://primo.ai/wiki/Windsurf">Primo Wiki（Windsurf）</a></p>
+            </article>
+
+            <article class="other-detail" id="odetail-cline" data-other-panel="cline" role="tabpanel" aria-labelledby="otab-cline" tabindex="0">
+              <div class="tool-head"><h3>Cline / Roo Code</h3><span class="en">独立开源（Apache-2.0）VS Code agent · 自备 API Key</span></div>
+              <p class="verdict">一活一死：<strong>Cline 活跃（v4.1.26，2026-10-26）；Roo Code 已于 2026-05-15 停运</strong>。</p>
+              <dl class="facts">
+                <div class="fact"><dt>Cline</dt><dd>v4.1.26 <small>约 71k GitHub stars、约 590 万安装</small></dd></div>
+                <div class="fact"><dt>Roo Code</dt><dd><span class="st no">已停运</span> <small>最终版 v3.54.0，仓库已归档</small></dd></div>
+                <div class="fact"><dt>价格</dt><dd>软件免费 <small>只付你所用模型的 API 费</small></dd></div>
+                <div class="fact"><dt>国内可用</dt><dd>✓ 软件本身 <small>自装 + 自备 Key；取决于所接模型——GLM / Qwen 等国内 API 可用，Claude API 官方不支持</small></dd></div>
+              </dl>
+              <ul class="points">
+                <li>Cline v4.0.0（2026-06-26）把插件迁到 Cline SDK 之上，现另有 CLI、JetBrains 与桌面端形态。</li>
+                <li>Roo Code 停运同日 Roo Code Cloud / Router 一并关闭、余额已退；roocode.com 跳转到团队新产品 Roomote。</li>
+                <li>想继续用 Roo 路线的，看社区分叉 <strong>ZooCode</strong>（及 Kilo Code）。</li>
+              </ul>
+              <p class="src">来源：<a href="https://www.edgewisely.com/cline-vs-roo-code/">EdgeWisely（Cline vs Roo Code）</a> · <a href="https://kipt.me/guides/cline-vs-roo-code">Kipt（Cline vs Roo Code）</a> · <a href="https://pickuma.com/for-dev/cline-vs-roo-code-open-source-agentic-coding-2026/">Pickuma（开源 agent 对比）</a></p>
+            </article>
+
+            <article class="other-detail" id="odetail-aider" data-other-panel="aider" role="tabpanel" aria-labelledby="otab-aider" tabindex="0">
+              <div class="tool-head"><h3>Aider / OpenHands</h3><span class="en">开源 agent · 自备 API Key / 可自托管</span></div>
+              <p class="verdict">同样一冷一热：<strong>Aider 基本停更；OpenHands 非常活跃（v1.43.0，2026-11-20）</strong>。</p>
+              <dl class="facts">
+                <div class="fact"><dt>Aider</dt><dd><span class="st mid">停滞</span> <small>最新 PyPI 版 v0.86.2（2026-02-12），main 最后提交 05-22，仓库未归档</small></dd></div>
+                <div class="fact"><dt>OpenHands</dt><dd>v1.43.0 <small>2026-11-20，近乎日更（v1.41.0 为 11-16）</small></dd></div>
+                <div class="fact"><dt>价格</dt><dd>开源免费 <small>只付模型费；OpenHands Cloud 为付费托管，确切价格未核实</small></dd></div>
+                <div class="fact"><dt>国内可用</dt><dd>✓ 可自托管 <small>接国内可达的模型即可在大陆使用，开源本体无需向厂商付费</small></dd></div>
+              </dl>
+              <ul class="points">
+                <li>Aider（Apache-2.0，终端结对编程）：自 2025 年 8 月以来只发过一版，2026 年 10 月有约 531 个未合并 PR 的报道；活跃的社区分叉是 <strong>cecli</strong>（原 aider-ce，v1.9.x，2026 年 10 月）。</li>
+                <li>OpenHands（All Hands AI，MIT）现以 <strong>Agent Canvas</strong> 为中心，也能调度 Claude Code / Codex / OpenCode 等其他 agent；其终端 CLI 已于 2026 年 8 月标记为不再维护。</li>
+              </ul>
+              <p class="src">来源：<a href="https://www.aicoderscope.com/blog/aider-2026-stalled-what-happened-alternatives/">AICoderScope（Aider 停滞分析）</a> · <a href="https://stackscape.org/en/p/openhands/">StackScape（OpenHands）</a> · <a href="https://agentbreakingchanges.com/tools/openhands/v1.41.0/">AgentBreakingChanges（OpenHands v1.41.0）</a></p>
+            </article>
+
+            <article class="other-detail" id="odetail-kiro" data-other-panel="kiro" role="tabpanel" aria-labelledby="otab-kiro" tabindex="0">
+              <div class="tool-head"><h3>Kiro / Devin</h3><span class="en">AWS · 规格驱动的 agentic IDE + CLI + Web；附 Cognition 的 Devin</span></div>
+              <p class="verdict">Kiro：<strong>2025-11-17 已 GA</strong>，2026 年重点是 <strong>Kiro CLI 3.0（2026-11-03）</strong>。</p>
+              <dl class="facts">
+                <div class="fact"><dt>Kiro 价格</dt><dd>Free $0（50 credits/月） <small>Pro $20（1,000）/ Pro+ $40（2,000）/ Pro Max $100（5,000）/ Power $200（10,000）；加购 $0.04/credit</small></dd></div>
+                <div class="fact"><dt>Kiro 国内</dt><dd><span class="st mid">？ 未证实</span> <small>经 AWS 国际 / Builder ID 美元计费；未找到 AWS 中国区（北京 / 宁夏）的 Kiro offering 或人民币路线</small></dd></div>
+                <div class="fact"><dt>Devin 模型</dt><dd>SWE-2 <small>2026-09-10，由 Kimi K3 后训练，仅 Devin 内可用，无公开 API / 权重</small></dd></div>
+              </dl>
+              <ul class="points">
+                <li>Kiro 的形态是「提示词 → 需求 / 设计 / 任务 → 代码」的规格驱动流程；2026 年另有 Kiro Crew 开源（08-04），10 月 30 日加入 Opus 5.5 / GPT-5.6、11 月 4 日加入 Haiku 5.5 / Kimi K3。</li>
+                <li>Kiro 是 Amazon Q Developer 的指定继任者：Q 新订阅已于 2026-05-15 停止，插件支持到 2027-04-30 结束。企业版 11 月 4 日起可做席位间 credits 池化（$20/席位含 500 共享 credits）。</li>
+                <li>Devin（简记）：云端自治 agent + Devin Desktop / CLI（见 Windsurf 一条）；定价已与 Devin Desktop 统一（Free / Pro $20 / Max $200 / Teams $80 基础价），ACU 计费 2026 年 3 月退役、改为日 / 周配额。</li>
+              </ul>
+              <p class="src">来源：<a href="https://ai.vi.ki/kiro/history/1">Kiro 版本史</a> · <a href="https://tailkits.com/tools/kiro/">Tailkits（Kiro）</a> · <a href="https://saascity.io/blog/devin-swe-2-20-dollar-plan-september-2026">SaasCity（Devin SWE-2）</a> · <a href="https://www.vibetoolrank.com/compare/kiro-vs-windsurf/">VibeToolRank（Kiro vs Windsurf）</a></p>
+            </article>
+
+          </div>
+        </div>
+
+        <div class="callout">
+          <p><strong>这一页还没核实到的：</strong>① Copilot、Devin / Windsurf、Kiro 的官方大陆可用性与支付——都没找到官方中国 offering，按「未证实」标，不等于确认不可用（Claude 是官方明确不支持，两回事）；② Moonshot、智谱（国内）、MiniMax 国内版、阿里的官方支付宝 / 微信清单未在官方页逐项读到，Trae 国内版的支付宝 / 微信 / 抖音支付则有明确来源；③ OpenHands Cloud 的确切价格；④ K3.1 Pro、Fable 5.2、Qwen4-Max 等 11 月新事实主要据官方发布经多家可靠追踪站转述，未在调研窗口内逐一打开厂商页原文。</p>
+        </div>
       </section>
 
       <!-- ============ Payment comparison ============ -->
@@ -1035,6 +1316,36 @@
           var tag = document.createElement('span'); tag.className = 'tab-new'; tag.textContent = '更新';
           t.appendChild(dot); t.appendChild(tag);
         };
+      })();
+    </script>
+    <script>
+      (function () {
+        var obtns = Array.prototype.slice.call(document.querySelectorAll('[data-other]'));
+        if (!obtns.length) return;
+        var odetails = {};
+        document.querySelectorAll('[data-other-panel]').forEach(function (pl) { odetails[pl.getAttribute('data-other-panel')] = pl; });
+        function activateOther(id, opts) {
+          opts = opts || {};
+          if (!odetails[id]) id = 'kimi';
+          obtns.forEach(function (b) {
+            var on = b.getAttribute('data-other') === id;
+            b.setAttribute('aria-selected', on ? 'true' : 'false');
+            b.tabIndex = on ? 0 : -1;
+            if (on && opts.focus) b.focus();
+          });
+          Object.keys(odetails).forEach(function (k) { odetails[k].classList.toggle('active', k === id); });
+        }
+        obtns.forEach(function (b, i) {
+          b.addEventListener('click', function () { activateOther(b.getAttribute('data-other')); });
+          b.addEventListener('keydown', function (e) {
+            var j = null;
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') j = (i + 1) % obtns.length;
+            else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') j = (i - 1 + obtns.length) % obtns.length;
+            else if (e.key === 'Home') j = 0;
+            else if (e.key === 'End') j = obtns.length - 1;
+            if (j !== null) { e.preventDefault(); activateOther(obtns[j].getAttribute('data-other'), { focus: true }); }
+          });
+        });
       })();
     </script>
     <script>
