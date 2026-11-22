@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>AI 编程工具最新情况</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #fcfcfb;
+        --surface: #f3f2ee;
+        --surface-2: #eceae3;
+        --ink: #17181a;
+        --ink-2: #4c4f55;
+        --ink-3: #767a82;
+        --line: #ddd9d0;
+        --accent: #b3352b;
+        --accent-soft: #f9e9e6;
+        --teal: #0e6e5c;
+        --teal-soft: #e3f0ec;
+        --amber: #96660a;
+        --amber-soft: #f7ecd4;
+        --chart-input: #0e6e5c;
+        --chart-output: #b3352b;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #141518;
+          --surface: #1d1f23;
+          --surface-2: #26282e;
+          --ink: #eceae4;
+          --ink-2: #b9bcc2;
+          --ink-3: #8b8f97;
+          --line: #33363d;
+          --accent: #e0685c;
+          --accent-soft: #3a2320;
+          --teal: #4cbfa5;
+          --teal-soft: #1d2f2a;
+          --amber: #d9a94e;
+          --amber-soft: #33291a;
+          --chart-input: #4cbfa5;
+          --chart-output: #e0685c;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+        font-size: 16px;
+        line-height: 1.75;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 72px; }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      code, .mono { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.92em; }
+      button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) { min-height: 2rem; }
+
+      /* ---------- header ---------- */
+      header { padding: 44px 0 8px; }
+      .dateline {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px; color: var(--ink-3);
+        letter-spacing: 0.04em;
+      }
+      h1 {
+        font-family: "Noto Serif SC", serif;
+        font-weight: 900;
+        font-size: clamp(30px, 6vw, 44px);
+        line-height: 1.25;
+        margin: 12px 0 14px;
+      }
+      .lede { font-size: 17px; color: var(--ink-2); margin: 0 0 6px; max-width: 46em; }
+      .lede strong { color: var(--ink); }
+
+      nav.toc {
+        display: flex; flex-wrap: wrap; gap: 8px;
+        margin: 26px 0 4px; padding: 16px 0;
+        border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      }
+      nav.toc a {
+        color: var(--ink); background: var(--surface);
+        border: 1px solid var(--line); border-radius: 999px;
+        padding: 6px 14px; font-size: 14px; line-height: 1.4;
+        display: inline-flex; align-items: center; min-height: 36px;
+      }
+      nav.toc a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+      /* ---------- summary ---------- */
+      .tldr {
+        background: var(--surface);
+        border-radius: 6px;
+        padding: 22px 24px 10px;
+        margin: 28px 0 8px;
+      }
+      .tldr h2 {
+        font-family: "Noto Serif SC", serif; font-size: 19px; margin: 0 0 10px;
+      }
+      .tldr ul { margin: 0; padding-left: 1.25em; }
+      .tldr li { margin-bottom: 10px; }
+
+      /* ---------- sections ---------- */
+      section.tool { padding: 38px 0 6px; border-bottom: 1px solid var(--line); }
+      section.tool:last-of-type { border-bottom: none; }
+      .tool-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px; margin-bottom: 4px; }
+      .tool-head h2 {
+        font-family: "Noto Serif SC", serif; font-weight: 700;
+        font-size: clamp(23px, 4.5vw, 29px); margin: 0; line-height: 1.3;
+      }
+      .tool-head .en { color: var(--ink-3); font-size: 15px; }
+      .verdict { font-size: 16.5px; margin: 8px 0 16px; }
+      .verdict strong { color: var(--accent); }
+
+      .badges { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 16px; }
+      .badge {
+        font-size: 12.5px; line-height: 1.5; padding: 3px 10px; border-radius: 999px;
+        border: 1px solid var(--line); color: var(--ink-2); background: var(--bg);
+      }
+      .badge.official { color: var(--teal); border-color: var(--teal); background: var(--teal-soft); }
+      .badge.warn { color: var(--amber); border-color: var(--amber); background: var(--amber-soft); }
+      .badge b { font-family: "JetBrains Mono", monospace; font-weight: 600; }
+
+      .facts {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1px; background: var(--line); border: 1px solid var(--line);
+        border-radius: 6px; overflow: hidden; margin: 16px 0;
+      }
+      .fact { background: var(--bg); padding: 12px 16px; }
+      .fact dt { font-size: 12.5px; color: var(--ink-3); margin: 0 0 2px; }
+      .fact dd { margin: 0; font-weight: 600; font-size: 15.5px; }
+      .fact dd small { font-weight: 400; color: var(--ink-2); font-size: 13px; }
+
+      h3.sub {
+        font-size: 16px; font-weight: 700; margin: 24px 0 8px;
+      }
+      ul.points { padding-left: 1.25em; margin: 8px 0; }
+      ul.points li { margin-bottom: 9px; }
+      p { margin: 10px 0; }
+      .small { font-size: 13.5px; color: var(--ink-2); }
+      .src { font-size: 13px; color: var(--ink-3); }
+      .src a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 2px; }
+
+      .callout {
+        border: 1px solid var(--amber); background: var(--amber-soft);
+        border-radius: 6px; padding: 14px 18px; margin: 16px 0; font-size: 15px;
+      }
+      .callout.teal { border-color: var(--teal); background: var(--teal-soft); }
+      .callout p { margin: 4px 0; }
+
+      /* tables */
+      .tbl-wrap { margin: 14px 0; }
+      table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+      caption { text-align: left; font-size: 13px; color: var(--ink-3); padding-bottom: 6px; }
+      th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+      thead th { font-size: 13px; color: var(--ink-2); border-bottom: 2px solid var(--ink-3); white-space: nowrap; }
+      td.num, th.num { text-align: right; font-family: "JetBrains Mono", monospace; font-size: 13.5px; white-space: nowrap; }
+      tr.hl td { background: var(--accent-soft); }
+
+      /* chart */
+      .chart-card { background: var(--surface); border-radius: 6px; padding: 18px 18px 10px; margin: 16px 0; }
+      .chart-card h3 { margin: 0 0 2px; font-size: 15.5px; }
+      .chart-card .sub { font-size: 13px; color: var(--ink-2); margin: 0 0 8px; }
+      .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--ink-2); margin: 6px 0 4px; }
+      .legend span { display: inline-flex; align-items: center; gap: 6px; }
+      .swatch { width: 14px; height: 10px; border-radius: 2px; display: inline-block; }
+      svg text { font-family: "Noto Sans SC", sans-serif; }
+
+      /* code block with copy */
+      .cmd {
+        display: flex; align-items: center; gap: 10px;
+        background: var(--surface-2); border-radius: 6px;
+        padding: 10px 12px 10px 16px; margin: 12px 0;
+      }
+      .cmd code { flex: 1; overflow-x: auto; white-space: nowrap; font-size: 14px; }
+      .cmd button {
+        flex: none; border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+        border-radius: 5px; padding: 6px 14px; font-size: 13px; cursor: pointer; min-height: 36px;
+        font-family: inherit;
+      }
+      .cmd button:hover { border-color: var(--accent); color: var(--accent); }
+
+      /* timeline */
+      .timeline { list-style: none; margin: 14px 0; padding: 0; }
+      .timeline li { display: flex; gap: 14px; padding: 7px 0; border-bottom: 1px dashed var(--line); }
+      .timeline li:last-child { border-bottom: none; }
+      .timeline .d {
+        flex: none; width: 92px; font-family: "JetBrains Mono", monospace;
+        font-size: 13px; color: var(--accent); padding-top: 3px;
+      }
+      .timeline .e { flex: 1; font-size: 15px; }
+
+      /* follow-up channels */
+      .channels { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 16px 0; }
+      .channel { border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; }
+      .channel h3 { margin: 0 0 6px; font-size: 15.5px; }
+      .channel p { margin: 4px 0; font-size: 14px; color: var(--ink-2); }
+      .channel a { font-size: 14px; }
+
+      .openq { background: var(--surface); border-radius: 6px; padding: 20px 24px 8px; margin: 16px 0; }
+      .openq li { margin-bottom: 10px; }
+
+      footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); }
+      footer h2 { font-family: "Noto Serif SC", serif; font-size: 18px; margin: 0 0 10px; }
+      footer ul { padding-left: 1.2em; font-size: 13.5px; color: var(--ink-2); }
+      footer li { margin-bottom: 5px; overflow-wrap: anywhere; }
+      .foot-note { font-size: 13px; color: var(--ink-3); margin-top: 18px; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+
+      <header>
+        <div class="dateline">数据核查于 2026-11-22 · 静态快照，打开后不会自动更新</div>
+        <h1>你常用的 AI 编程工具，<br />到 2026 年 11 月变成了什么样</h1>
+        <p class="lede">覆盖 DeepSeek 模型与 Harness、Cursor、Codex、Antigravity、WorkBuddy、Hermes 七项。先说最重要的一条：<strong>你说的「DeepSeek V4.1 Flash」是官方正式名</strong>，当前线上版本是 10 月 17 日的检查点 V4.1-Flash-1017，API 模型名 <code>deepseek-flash</code>，也是目前性价比最高的编程模型之一。</p>
+        <nav class="toc" aria-label="目录">
+          <a href="#deepseek">DeepSeek 模型</a>
+          <a href="#harness">DeepSeek Harness</a>
+          <a href="#cursor">Cursor</a>
+          <a href="#codex">Codex</a>
+          <a href="#antigravity">Antigravity</a>
+          <a href="#workbuddy">WorkBuddy</a>
+          <a href="#hermes">Hermes</a>
+          <a href="#follow">怎么持续跟进</a>
+          <a href="#open">存疑事项</a>
+        </nav>
+      </header>
+
+      <div class="tldr">
+        <h2>速览：只看这五条</h2>
+        <ul>
+          <li><strong>DeepSeek：</strong>旧版 V4-Flash 已在 API 上退役，统一走 <code>deepseek-flash</code>（V4.1-Flash-1017），1M 上下文，非高峰价输入 $0.15 / 输出 $0.60 每百万 token。DeepSeek 还推出了自家编程 agent 运行时 <strong>Harness（<code>dsh</code>）</strong>，但仍是开发者预览版。</li>
+          <li><strong>Cursor：</strong>已变成以 Agents Window 为核心的 Cursor 3；2026 年 10 月起新购个人版改为打包 Grok 的「The X Subscription」，旧 Pro $20 只保留给老用户，切换据称不可逆，动手前先看清。</li>
+          <li><strong>Codex：</strong>模型线已越过 GPT-5-Codex，当前是 GPT-5.6 家族（Sol / Terra / Luna）；Codex 不再有独立订阅，包含在 ChatGPT 套餐里按额度计费。</li>
+          <li><strong>Antigravity：</strong>2.0 扩展为桌面端 / IDE / CLI / SDK 五个面，免费版可直接开始用；Gemini CLI 已于 2026 年 6 月停止服务免费与个人账户，由 Antigravity CLI（<code>agy</code>）取代。</li>
+          <li><strong>WorkBuddy 与 Hermes：</strong>WorkBuddy 是腾讯的办公 agent（不是纯编程 IDE，编程对应的是 CodeBuddy），首发即支持 DeepSeek 并已同步 1017 版；「Hermes」要分清是 Nous 的开源模型（最新 4.3，没有 Hermes 5）还是迭代很快的 Hermes Agent 框架（最新稳定版 v0.23.3）。</li>
+        </ul>
+      </div>
+
+      <!-- ============ DeepSeek ============ -->
+      <section class="tool" id="deepseek">
+        <div class="tool-head">
+          <h2>DeepSeek 模型</h2><span class="en">V4 / V4.1 / Flash</span>
+        </div>
+        <p class="verdict">结论：<strong>「V4.1 Flash」是官方名，不是记错。</strong>2026 年 9 月 10 日正式 GA，旧 V4-Flash 同日退役；你现在调 <code>deepseek-flash</code> 拿到的就是它。</p>
+        <div class="badges">
+          <span class="badge official">官方文档已证实</span>
+          <span class="badge">最新检查点 <b>V4.1-Flash-1017</b>（2026-10-17）</span>
+          <span class="badge">API 模型名 <b>deepseek-flash</b></span>
+        </div>
+
+        <dl class="facts">
+          <div class="fact"><dt>架构</dt><dd>552B MoE <small>因果编码器-解码器，输入激活 8B / 输出激活 16B</small></dd></div>
+          <div class="fact"><dt>上下文 / 最大输出</dt><dd>1M / 384K <small>原生支持视觉</small></dd></div>
+          <div class="fact"><dt>同系旗舰</dt><dd>deepseek-v4-pro <small>当前为 V4-Pro-0813；V4.1-Pro 尚未发布</small></dd></div>
+          <div class="fact"><dt>已退役</dt><dd>V4-Flash 等旧 ID <small>2026-09-10 起自动路由到 V4.1-Flash</small></dd></div>
+        </dl>
+
+        <h3 class="sub">2026 年时间线</h3>
+        <ul class="timeline">
+          <li><span class="d">04-24</span><span class="e">V4 预览版发布：V4-Pro（1.6T 总参 / 49B 激活）与 V4-Flash（284B / 13B），均 1M 上下文、开源权重。</span></li>
+          <li><span class="d">07-24</span><span class="e"><code>deepseek-chat</code> / <code>deepseek-reasoner</code> 按计划在此日期后退役。</span></li>
+          <li><span class="d">09-10</span><span class="e">V4.1-Flash 正式发布（GA），V4-Flash、V4-Flash-Vision-Exp 同日退役。</span></li>
+          <li><span class="d">10-17</span><span class="e">最新检查点 V4.1-Flash-1017 上线，模型 ID 与价格不变，编程基准进一步提升。</span></li>
+        </ul>
+
+        <h3 class="sub">API 价格（官方价格页，美元 / 每百万 token）</h3>
+        <div class="chart-card">
+          <h3>缓存未命中输入与输出价格：非高峰 vs 高峰</h3>
+          <p class="sub">高峰时段为 UTC 周一至周五 01:00–04:00 与 06:00–10:00（中国法定节假日除外），换算成北京时间是 <strong>09:00–12:00 与 14:00–18:00</strong>——正好覆盖工作日白天，这段时间价格翻倍，跑批量任务尽量避开。</p>
+          <div id="price-chart" role="img" aria-label="DeepSeek API 价格条形图：deepseek-flash 非高峰输入 0.15、高峰 0.30、非高峰输出 0.60、高峰输出 1.20 美元；deepseek-v4-pro 非高峰输入 0.66、高峰 1.32、非高峰输出 1.98、高峰输出 3.96 美元，均每百万 token。"></div>
+          <div class="legend">
+            <span><i class="swatch" style="background:var(--chart-input)"></i>输入（缓存未命中）</span>
+            <span><i class="swatch" style="background:var(--chart-output)"></i>输出</span>
+            <span>实色 = 非高峰价 · 半透明 = 高峰价</span>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>模型</th><th class="num">输入·缓存命中</th><th class="num">输入·未命中</th><th class="num">输出</th></tr></thead>
+            <tbody>
+              <tr class="hl"><td><code>deepseek-flash</code>（V4.1-Flash-1017）非高峰</td><td class="num">$0.003</td><td class="num">$0.15</td><td class="num">$0.60</td></tr>
+              <tr class="hl"><td><code>deepseek-flash</code> 高峰</td><td class="num">$0.006</td><td class="num">$0.30</td><td class="num">$1.20</td></tr>
+              <tr><td><code>deepseek-v4-pro</code>（V4-Pro-0813）非高峰</td><td class="num">—</td><td class="num">$0.66</td><td class="num">$1.98</td></tr>
+              <tr><td><code>deepseek-v4-pro</code> 高峰</td><td class="num">—</td><td class="num">$1.32</td><td class="num">$3.96</td></tr>
+            </tbody>
+          </table>
+          <p class="small">注：9 月 10 日的发布说明曾称 V4-Pro 将自 9 月 14 日起路由到 Flash，DeepSeek 后来撤回了这一安排——11 月官方价格页仍单独列出 V4-Pro-0813。以价格页为准。</p>
+        </div>
+
+        <h3 class="sub">编程基准：厂商数字好看，但独立测量差了一截</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>基准</th><th class="num">V4.1-Flash（9 月版）</th><th class="num">1017 检查点</th><th>来源</th></tr></thead>
+            <tbody>
+              <tr><td>DeepSWE v1.1</td><td class="num">74.2%</td><td class="num">77.0%</td><td>厂商公布</td></tr>
+              <tr><td>Terminal-Bench</td><td class="num">90.6%（2.1 版）</td><td class="num">42.3%（4.0 版）</td><td>厂商公布，两版不可直接比</td></tr>
+              <tr><td>Terminal-Bench 4.0（独立测量）</td><td class="num">—</td><td class="num">31.82%</td><td>Vals.ai，用的 harness 不同</td></tr>
+              <tr><td>HumanEval</td><td class="num">79.4%</td><td class="num">—</td><td>厂商公布（V4-Pro 为 76.8%）</td></tr>
+              <tr><td>ProgramBench</td><td class="num">20.3</td><td class="num">29.1</td><td>厂商公布</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <p><strong>怎么读这些数字：</strong>厂商的 42.3% 用的是 DeepSeek 自己的 Claude Code harness，Vals.ai 用 mini-swe-agent 测出 31.82%——harness 不同，数字不能横比。可以确认的只有趋势：1017 比 9 月版确实更强，且官方说明它「针对 DeepSeek Harness 做了优化」。</p>
+        </div>
+        <p class="src">来源：<a href="https://api-docs.deepseek.com/news/news260910/">DeepSeek 官方发布说明（2026-09-10）</a> · <a href="https://api-docs.deepseek.com/news/news260424/">V4 预览发布说明（2026-04-24）</a> · <a href="https://api-docs.deepseek.com/quick_start/pricing/?push_animated=1&amp;show_loading=0&amp;theme=light&amp;webview_progress_bar=1">DeepSeek 官方价格页</a> · <a href="https://www.layer3labs.io/guides/deepseek-v4-1-flash-explained">Layer3 Labs 解读</a></p>
+      </section>
+
+      <!-- ============ Harness ============ -->
+      <section class="tool" id="harness">
+        <div class="tool-head">
+          <h2>DeepSeek Harness</h2><span class="en">命令行工具 dsh</span>
+        </div>
+        <p class="verdict">结论：<strong>是 DeepSeek 官方出的开源编程 agent 运行时</strong>，对标 Claude Code 这类工具；但仍在开发者预览阶段，官方明确警告会有破坏性变更，别当稳定生产工具用。</p>
+        <div class="badges">
+          <span class="badge official">官方开源 · MIT 协议</span>
+          <span class="badge">2026-08-13 以 v0.1 开发者预览上线</span>
+          <span class="badge warn">已确认最新版 <b>v0.2.1-rc.1</b>（2026-10-17 随 1017 模型说明提及）</span>
+        </div>
+        <ul class="points">
+          <li>基于 Cordis 框架，「一切皆插件」：模型、工具、技能、会话、沙箱、文件系统、主循环、界面都可替换。</li>
+          <li>能查看与修改仓库、跑 shell、搜索、做计划、派发子 agent——子 agent 后端甚至可以挂 Claude Code 和 Codex；模型不限于 DeepSeek，二手报道称支持约 40 家提供商。</li>
+          <li>2026 年 9 月 30 日宣布桌面版。1017 模型说明里写明该检查点「针对 DeepSeek Harness 优化」，并要求升级到 v0.2.1-rc.1 或更高版本——如果你在用 Harness 跑 1017，这是必升项。</li>
+        </ul>
+        <div class="cmd">
+          <code>npx @deepseek-ai/dsh web</code>
+          <button type="button" data-copy="npx @deepseek-ai/dsh web">复制</button>
+        </div>
+        <p class="src">来源：<a href="https://venturebeat.com/technology/deepseek-harness-launches-as-open-source-rival-to-claude-code-alongside-v4-pro-on-api-with-higher-prices">VentureBeat 上线报道</a> · <a href="https://www.kdnuggets.com/what-ive-learned-about-deepseek-harness">KDnuggets 试用</a> · <a href="https://deepseek-harness.io/deepseek-v4-1-flash-1017">deepseek-harness.io 的 1017 说明</a></p>
+      </section>
+
+      <!-- ============ Cursor ============ -->
+      <section class="tool" id="cursor">
+        <div class="tool-head">
+          <h2>Cursor</h2><span class="en">AI 代码编辑器</span>
+        </div>
+        <p class="verdict">结论：产品形态已从「带 AI 的编辑器」变成 <strong>以 Agents Window 为中心的 agent 平台</strong>；价格体系 10 月刚大改，新购与续费完全是两套规则。</p>
+        <div class="badges">
+          <span class="badge">当前大版本 <b>Cursor 3</b>（2026-04-02）</span>
+          <span class="badge">11 月论坛可见构建号约 3.16–3.28</span>
+          <span class="badge warn">定价为二手来源汇总，Cursor 未公布可计数的用量单位</span>
+        </div>
+        <ul class="points">
+          <li><strong>Agents Window：</strong>多个 agent 并行跑在本地 / worktree / 云端 / 远程 SSH 之间，可本地↔云端交接，PR 审查直接在应用内完成。11 月更新日志新增云端 agent 开发环境、多仓库环境、接入 Microsoft Teams、Bugbot 努力等级、平铺式 Agents Window 与语音输入。</li>
+          <li><strong>自研模型 Composer 2.5</strong>（2026-05-18）：基于 Moonshot Kimi K2.5 后训练，Cursor 内报告上下文 200K，SWE-Bench Multilingual 79.8%、Terminal-Bench 2.0 69.3%（Cursor 口径）。</li>
+        </ul>
+        <div class="callout">
+          <p><strong>Composer 2.5 的价格陷阱：</strong>宣传的 Standard 价 $0.50 / $2.50（输入/输出，每百万 token）<strong>不是默认档</strong>；默认的 Fast 档是 $3 / $15。用之前先在设置里确认自己在哪一档。</p>
+        </div>
+        <h3 class="sub">2026-10-12 起的新定价：The X Subscription</h3>
+        <p>SpaceX 收购于 8 月 14 日完成（据二手报道）后，Cursor 与 Grok、X 打包销售。旧体系是 Hobby 免费 / Pro $20 / Pro+ $60 / Ultra $200；<strong>旧 Pro $20 只对现有订阅者保留</strong>，新购一律走下表：</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>档位</th><th class="num">月费</th><th>包含什么</th></tr></thead>
+            <tbody>
+              <tr><td>Free</td><td class="num">$0</td><td>免费层</td></tr>
+              <tr><td>Plus</td><td class="num">$8</td><td>只能用 Cursor 自家的 Grok / Composer 模型；无云端 agent、无 Bugbot、不能用第三方模型</td></tr>
+              <tr><td>Premium</td><td class="num">$30</td><td>用量为 Plus 的 4×；解锁云端 agent、Bugbot 与第三方模型</td></tr>
+              <tr><td>Super</td><td class="num">$100</td><td>用量为 Plus 的 15×</td></tr>
+              <tr><td>Ultra</td><td class="num">$200</td><td>用量为 Plus 的 50×</td></tr>
+            </tbody>
+          </table>
+          <p class="small">注意：即便在 Premium 及以上，Claude / GPT / Gemini 等第三方模型仍按 API 标价从预付额度里另扣。多个 11 月二手来源口径一致，但 Cursor 官方没有公布可计数的用量单位，<strong>从旧 Pro 切换据称是永久性的</strong>——切换前务必在 cursor.com/pricing 亲自核对。</p>
+        </div>
+        <p class="src">来源：<a href="https://cursor.com/changelog/3-1">Cursor 官方更新日志（3.1）</a> · <a href="https://cursor.com/changelog/page/8">Cursor 更新日志存档</a> · <a href="https://codersera.com/blog/cursor-pricing-plans-spacex-grok-2026/">Codersera 定价汇总</a> · <a href="https://fastero.com/blog/cursor-pricing">Fastero 定价汇总</a></p>
+      </section>
+
+      <!-- ============ Codex ============ -->
+      <section class="tool" id="codex">
+        <div class="tool-head">
+          <h2>OpenAI Codex</h2><span class="en">云端 agent + CLI + IDE 插件</span>
+        </div>
+        <p class="verdict">结论：产品形态没变（云端异步 agent、开源 CLI、IDE 插件、GitHub PR 审查四件套），但<strong>模型已经两代之后了</strong>——GPT-5-Codex 只是 2025 年 9 月的起点，当前主力是 2026 年 7 月 GA 的 GPT-5.6 家族。</p>
+        <div class="badges">
+          <span class="badge">包含在 ChatGPT 套餐内，无独立 Codex 订阅</span>
+          <span class="badge">CLI 子 agent 已于 v0.115.0 转正（2026-03-16，最多 6 个并发）</span>
+          <span class="badge warn">价格随使用界面与促销而不同，预算前先查费率卡</span>
+        </div>
+        <h3 class="sub">模型时间线</h3>
+        <ul class="timeline">
+          <li><span class="d">2025-09</span><span class="e">GPT-5-Codex 发布，号称可连续自主工作 7 小时以上。</span></li>
+          <li><span class="d">2026-01</span><span class="e">GPT-5.2-Codex。</span></li>
+          <li><span class="d">2026-02-12</span><span class="e">GPT-5.3-Codex-Spark：主打实时编程，生成速度 1000+ token/秒。</span></li>
+          <li><span class="d">2026-04-23</span><span class="e">GPT-5.5。</span></li>
+          <li><span class="d">2026-07-09</span><span class="e">GPT-5.6 家族 GA：Sol（旗舰）、Terra、Luna 三档。</span></li>
+        </ul>
+        <ul class="points">
+          <li><strong>价格参考（口径不一，仅供量级感）：</strong>7 月对比文章里 Sol 的 API 标价为 $5 / $30；OpenAI 11 月企业费率卡里 Codex / Work 用途的 Sol 是 $4 / $20、Terra $2 / $12、Luna $0.20 / $1.20。不同界面、不同促销费率不同，别按单一数字做预算。</li>
+          <li><strong>访问方式：</strong>11 月多份指南称独立的 Codex Plus/Pro 已停售，Codex 统一打包进包括 Free 在内的 ChatGPT 套餐、按 credit 计量。OpenAI 帮助页按套餐区分，请以你自己 ChatGPT 账户里显示的为准。</li>
+          <li>CLI 为 Rust 重写版，开源仓库 2026 年 8 月约 105k stars；v0.115.0 起子 agent 转正（最多 6 并发），另有 Smart Approvals 与 hooks。</li>
+        </ul>
+        <div class="callout">
+          <p><strong>关于「GPT-6 已进 Codex」：</strong>OpenAI 11 月企业费率卡里确实出现了 GPT-6 / GPT-6.2 的行，但仅限 ChatGPT Work 与 Codex 企业场景；其他来源里 CLI 默认模型仍是 gpt-5.6-sol。把它当企业/限量供应看，个人用户暂时拿不到，不要为此调整选型。</p>
+        </div>
+        <p class="src">来源：<a href="https://codex.danielvaughan.com/2026/03/27/codex-cli-in-2026-whats-new/">Codex CLI 2026 变化梳理</a> · <a href="https://help.openai.com/en/articles/20001415-chatgpt-rate-card-enterprise-token-based-pricing">OpenAI 官方企业费率卡</a> · <a href="https://www.llmreference.com/compare/gpt-5.5/gpt-5.6-sol">GPT-5.5 与 5.6-Sol 对比</a></p>
+      </section>
+
+      <!-- ============ Antigravity ============ -->
+      <section class="tool" id="antigravity">
+        <div class="tool-head">
+          <h2>Google Antigravity</h2><span class="en">Agent 优先的开发平台</span>
+        </div>
+        <p class="verdict">结论：2025 年 11 月随 Gemini 3 发布的「agent 优先」平台，<strong>2026 年 5 月的 2.0 把它扩成了五件套</strong>；没有单独订阅，免费层就能开始用，付费走 Google AI 套餐。</p>
+        <div class="badges">
+          <span class="badge">2.0 发布于 2026-05-19（Google I/O）</span>
+          <span class="badge">11 月 12 日二手核查版本：App v2.31.2 / IDE v2.6.0 / CLI <b>agy</b> v1.5.7</span>
+          <span class="badge warn">模型阵容月月变，以应用内选择器为准</span>
+        </div>
+        <ul class="points">
+          <li><strong>五个面：</strong>桌面应用（并行 agent、动态子 agent、定时任务）、IDE、CLI <code>agy</code>、SDK，以及 Gemini API / 企业平台里的 Managed Agents。你扮演架构师/管理者，agent 同时操作编辑器、终端和浏览器。</li>
+          <li><strong>Gemini CLI 已退役：</strong>2026 年 6 月 18 日起停止服务免费与个人账户，由 Antigravity CLI 取代——还在用 Gemini CLI 的话需要迁移。</li>
+          <li><strong>免费层：</strong>Individual $0，Tab 补全与 Command 不限量，agent 有每周额度（不像付费层每 5 小时刷新）。付费层额度每 5 小时刷新、同时受周上限约束，与 Gemini 共用一个额度池。</li>
+          <li><strong>模型：</strong>发布时是 Gemini 3 Pro + Claude Sonnet 4.5 + GPT-OSS；11 月报道称全档位已有 Gemini 3.8 Flash，另有 Gemini 4 的 Hydrogen/Argon/Carbon 分层与付费层的 Claude 5.5 系——但 Gemini 4 这套命名只见于二手汇总，Google 官方博客未证实；且部分第三方模型原定 11 月 2 日下架，实际阵容请看应用内选择器。</li>
+        </ul>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>套餐</th><th class="num">月费</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td>Individual（免费）</td><td class="num">$0</td><td>补全/命令不限量；agent 每周额度</td></tr>
+              <tr><td>Google AI Pro</td><td class="num">$19.99</td><td>2026-05-19 重新定价；额度每 5 小时刷新</td></tr>
+              <tr><td>Ultra 5×</td><td class="num">$99.99</td><td>同上</td></tr>
+              <tr><td>Ultra 20×</td><td class="num">$199.99</td><td>顶档曾为 $249.99，本次降价</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="src">来源：<a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemini-3-developers/">Google 官方博客（Gemini 3 与 Antigravity 发布）</a> · <a href="https://apidog.com/blog/google-antigravity-2/">Apidog 的 2.0 梳理</a> · <a href="https://www.cloudzero.com/blog/google-antigravity-pricing/">CloudZero 定价汇总</a></p>
+      </section>
+
+      <!-- ============ WorkBuddy ============ -->
+      <section class="tool" id="workbuddy">
+        <div class="tool-head">
+          <h2>腾讯 WorkBuddy</h2><span class="en">全场景 AI 办公 agent</span>
+        </div>
+        <p class="verdict">结论：先纠正定位——<strong>WorkBuddy 不是纯编程 IDE</strong>，是腾讯云 CodeBuddy 团队 2026 年 3 月推出的办公 agent 工作台（文档、表格、PPT、本地文件、远程控制）；它真正的价值对你来说是<strong>在国内免折腾地用上便宜的 DeepSeek</strong>。仓库级编程请用它的兄弟产品 CodeBuddy，或 Cursor / Codex / Harness。</p>
+        <div class="badges">
+          <span class="badge">2026-03-09 由 CodeBuddy 团队发布</span>
+          <span class="badge official">DeepSeek V4.1-Flash 首发合作方（2026-09-10）</span>
+          <span class="badge">约 13 个模型可选，带 Auto 路由与 credit 倍率</span>
+        </div>
+        <ul class="points">
+          <li><strong>能干什么：</strong>文档/表格/PPT 生成、本地文件操作、140+ 个「专家」与专家团、Skills、MCP 连接器，并可通过微信 / 企业微信 / QQ / 飞书 / 钉钉远程遥控（WorkBuddy Claw）。企业版 2026 年 6 月推出；10 月 14 日起它以对话机器人形式进入企业微信联系人。</li>
+          <li><strong>模型阵容：</strong>腾讯混元 Hy3（2026-07-06，295B MoE / 21B 激活，256K）、GLM-5.2（2026-06-17 起在 WorkBuddy / CodeBuddy 内置，报道称 1M 上下文）、Kimi，以及 DeepSeek V4-Pro / V4-Flash。</li>
+          <li><strong>与 DeepSeek 的同步速度很快：</strong>V4.1-Flash-1017 已同步上线，倍率仅 <strong>0.11×</strong>，1M 上下文、原生多模态；WorkBuddy 内非高峰（工作日 09–12 点、14–18 点之外）credit 再减半。国际版曾在 9 月 11 日–10 月 31 日免费（0.00×）提供 V4.1-Flash，该促销已结束。</li>
+        </ul>
+        <p class="src">来源：<a href="https://cloud.tencent.com/developer/article/2766852?policyId=1004">腾讯云开发者社区（V4.1-Flash-1017 同步）</a> · <a href="https://cloud.tencent.com/developer/article/2706421">腾讯云开发者社区（模型与功能）</a> · <a href="https://cloud.tencent.com/developer/article/2749587">腾讯云开发者社区（产品发布）</a> · <a href="https://www.thepaper.cn/newsDetail_forward_34316899">澎湃新闻报道</a></p>
+      </section>
+
+      <!-- ============ Hermes ============ -->
+      <section class="tool" id="hermes">
+        <div class="tool-head">
+          <h2>Hermes</h2><span class="en">Nous Research：模型与 Agent 是两回事</span>
+        </div>
+        <p class="verdict">结论：「Hermes」指两个东西——(a) Nous 的<strong>开源权重模型</strong>系列，(b) 2026 年真正的热点 <strong>Hermes Agent</strong> 自我改进型 agent 框架。你日常听到的新进展，大多是后者。</p>
+        <div class="badges">
+          <span class="badge">模型最新：<b>Hermes 4.3</b>（2025-12）</span>
+          <span class="badge warn">未发现 Hermes 5 模型（10 月、11 月两次核查均无）</span>
+          <span class="badge">Agent 最新稳定版 <b>v0.23.3</b>（2026-11-19/20）</span>
+        </div>
+        <h3 class="sub">(a) Hermes 模型</h3>
+        <ul class="points">
+          <li>Hermes 4 于 2025 年 8 月发布：14B 基于 Qwen3，70B / 405B 基于 Llama 3.1，混合 <code>&lt;think&gt;</code> 推理，70B 版上下文 131K。</li>
+          <li>最新是 <strong>Hermes 4.3</strong>：36B，基于字节 Seed-OSS，Nous 发布页日期为 2025 年 12 月 3 日（部分二手来源误记为 9 月或 11 月），号称最高 512K 上下文，Apache-2.0。Nous 11 月最新上传的 Arete-27B 不是 Hermes 系列。</li>
+        </ul>
+        <h3 class="sub">(b) Hermes Agent</h3>
+        <ul class="points">
+          <li>2026 年 2 月 25 日发布，MIT 协议、Python 实现，卖点是「越用越强的 agent」：GEPA 式学习循环会把经验写成可复用的 skill 并持续改进，带持久记忆，可跑在本地 / Docker / SSH / Modal / serverless 上，且<strong>模型无关</strong>——不绑定 Hermes 模型，任意 LLM 都能驱动。</li>
+          <li>2026 年节点：4 月 30 日 v2026.4.30 引入 Autonomous Curator（自动修剪技能库，TUI 冷启动快约 57%）；6 月推出 Hermes Desktop；11 月 5 日 v0.23.0「Hearth」给桌面端加了浏览器标签式工作区；<strong>v0.23.3（11 月 19–20 日）</strong>是补丁汇总版，自 v0.23.2 以来约 370 个 PR。默认模型据报已从 GLM-5.2 换到 GLM-5.3，新增模型中包含 DeepSeek V4.1-Flash-1017。</li>
+          <li><strong>与 OpenClaw 的关系：</strong>两者是直接竞品（OpenClaw 前身 Clawdbot/Moltbot，现归 OpenClaw Foundation），同为 MIT 的常开型个人 agent。Hermes 自带 <code>hermes migrate openclaw</code> 一键迁移，Nous 还提供托管的 Hermes Cloud（付费 Portal 套餐含一个常开 agent）；OpenClaw 没有托管/付费层，也提供反向迁移。据 Nous 与社区说法，2026 年春有不少用户从 OpenClaw 迁到 Hermes。</li>
+        </ul>
+        <p class="src">来源：<a href="https://github.com/NousResearch/hermes-agent/releases/tag/v0.23.3">GitHub 发布页 v0.23.3</a> · <a href="https://github.com/NousResearch/hermes-agent/releases">Hermes Agent 全部发布</a> · <a href="https://hermes-agent.nousresearch.com/compare/openclaw">Nous 官方 OpenClaw 对比页</a> · <a href="https://www.ertas.ai/blog/hermes-agent-vs-hermes-4">模型与 Agent 的区别说明</a></p>
+      </section>
+
+      <!-- ============ Follow ============ -->
+      <section class="tool" id="follow">
+        <div class="tool-head">
+          <h2>怎么持续跟进，不靠刷新闻</h2><span class="en">每家只盯一个官方源头</span>
+        </div>
+        <p>这七项的共同规律是：<strong>版本与价格都变得很快，二手汇总经常过期或互相抄错</strong>（这次核查就发现了 DeepSeek 撤回路由安排、Hermes 4.3 日期被误传、Composer 默认档价格与宣传价不一致）。可靠的办法是只订阅每家的官方发布渠道，价格只认官方价格页：</p>
+        <div class="channels">
+          <div class="channel">
+            <h3>DeepSeek</h3>
+            <p>模型发布与检查点更新都发在 API 文档的 News 区，价格只看官方价格页——这次「V4-Pro 路由到 Flash」的反复就是只看新闻会踩的坑。</p>
+            <a href="https://api-docs.deepseek.com/news/news260910/">API 文档 · 更新日志</a><br />
+            <a href="https://api-docs.deepseek.com/quick_start/pricing/?push_animated=1&amp;show_loading=0&amp;theme=light&amp;webview_progress_bar=1">API 文档 · 价格页</a>
+          </div>
+          <div class="channel">
+            <h3>Cursor</h3>
+            <p>功能看官方 Changelog；但定价页没有可计数的用量单位，任何调价/换档动作之前，先到定价页逐条核对，尤其是从旧 Pro 切换不可逆这一点。</p>
+            <a href="https://cursor.com/changelog/page/8">cursor.com/changelog</a>
+          </div>
+          <div class="channel">
+            <h3>Codex / OpenAI</h3>
+            <p>模型与费率以 OpenAI 帮助中心的费率卡为准；套餐内额度则直接看自己 ChatGPT 账户的显示，二手「指南」普遍滞后。</p>
+            <a href="https://help.openai.com/en/articles/20001415-chatgpt-rate-card-enterprise-token-based-pricing">OpenAI 帮助中心 · 费率卡</a>
+          </div>
+          <div class="channel">
+            <h3>Antigravity / Google</h3>
+            <p>大版本看 Google 开发者博客；模型阵容每月都在变，最终以应用内模型选择器显示的为准，别信任何「完整模型列表」文章。</p>
+            <a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemini-3-developers/">blog.google · 开发者</a>
+          </div>
+          <div class="channel">
+            <h3>WorkBuddy / 腾讯</h3>
+            <p>模型同步与倍率调整都发在腾讯云开发者社区，国内可直接访问，也是确认 DeepSeek 新检查点何时落地的最快渠道。</p>
+            <a href="https://cloud.tencent.com/developer/article/2766852?policyId=1004">腾讯云开发者社区</a>
+          </div>
+          <div class="channel">
+            <h3>Hermes / 开源项目</h3>
+            <p>Hermes Agent、Codex CLI、DeepSeek Harness 都是开源项目：在 GitHub 上 Watch 仓库的 Releases 即可第一时间收到版本通知，比任何资讯号都快且准确。</p>
+            <a href="https://github.com/NousResearch/hermes-agent/releases">GitHub · hermes-agent Releases</a>
+          </div>
+        </div>
+        <h3 class="sub">三个习惯，比渠道更重要</h3>
+        <ul class="points">
+          <li><strong>价格只认官方页面，截图存档。</strong>DeepSeek 价格页、OpenAI 费率卡、Cursor 定价页都改过口径；做预算时截一张当时的图，日后对账有据。</li>
+          <li><strong>基准数字先问「谁测的、用什么 harness」。</strong>同一个模型在厂商 harness 与独立 harness 下能差出 10 个百分点（见 DeepSeek 一节），不看测量条件的跑分没有参考价值。</li>
+          <li><strong>每月固定 20 分钟过一遍上面六个源头。</strong>这七项在 2026 年的节奏大约是每月一个值得注意的变化，月度巡检足够；日报级刷资讯只会增加噪音。</li>
+        </ul>
+      </section>
+
+      <!-- ============ Open questions ============ -->
+      <section class="tool" id="open">
+        <div class="tool-head">
+          <h2>还没证实的事</h2><span class="en">别拿这些做决策</span>
+        </div>
+        <div class="openq">
+          <ul class="points">
+            <li><strong>DeepSeek V4.1-Pro：</strong>9 月时官方称「即将推出」，截至 2026-11-22 未查到发布。目前 Pro 线仍是 V4-Pro-0813。</li>
+            <li><strong>GPT-6 进入 Codex：</strong>只有 OpenAI 企业费率卡一条证据，且限定企业场景；无其他来源佐证它是 CLI 的普遍默认。</li>
+            <li><strong>Antigravity 的 Gemini 4 分层命名</strong>（Hydrogen / Argon / Carbon）：来自 11 月二手汇总，未见 Google 官方博客证实。</li>
+            <li><strong>各家额度无法从公开页面审计：</strong>Cursor 的 X 订阅用量池、Codex 的 credit 计量、Antigravity 未公开数字的每周额度，都没有做应用内实测，本页价格均为公开页面与多家二手来源交叉的结果（DeepSeek 价格页为官方原文抓取）。</li>
+            <li><strong>跑分多为厂商自报：</strong>Composer 2.5、GPT-5-Codex 的「7 小时自主工作」、DeepSeek 的 DeepSWE 等均按厂商口径标注；目前有独立第三方数字的只有 DeepSeek 1017 的 Terminal-Bench（31.82%，且 harness 不同）。</li>
+          </ul>
+        </div>
+      </section>
+
+      <footer>
+        <h2>主要来源</h2>
+        <ul>
+          <li>DeepSeek 官方：<a href="https://api-docs.deepseek.com/news/news260424/">V4 预览说明</a>、<a href="https://api-docs.deepseek.com/news/news260910/">V4.1-Flash 发布说明</a>、<a href="https://api-docs.deepseek.com/quick_start/pricing/?push_animated=1&amp;show_loading=0&amp;theme=light&amp;webview_progress_bar=1">价格页</a></li>
+          <li>Google 官方：<a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemini-3-developers/">Gemini 3 与 Antigravity 发布博客</a></li>
+          <li>Cursor 官方：<a href="https://cursor.com/changelog/3-1">更新日志 3.1</a>、<a href="https://cursor.com/changelog/page/8">更新日志存档</a></li>
+          <li>OpenAI 官方：<a href="https://help.openai.com/en/articles/20001415-chatgpt-rate-card-enterprise-token-based-pricing">企业费率卡</a></li>
+          <li>GitHub：<a href="https://github.com/NousResearch/hermes-agent/releases/tag/v0.23.3">hermes-agent v0.23.3</a>、<a href="https://hermes-agent.nousresearch.com/compare/openclaw">Nous 的 OpenClaw 对比页</a></li>
+          <li>腾讯云开发者社区：<a href="https://cloud.tencent.com/developer/article/2749587">WorkBuddy 发布</a>、<a href="https://cloud.tencent.com/developer/article/2766852?policyId=1004">V4.1-Flash-1017 同步</a></li>
+          <li>二手汇总（多源交叉后采用）：<a href="https://codersera.com/blog/cursor-pricing-plans-spacex-grok-2026/">Codersera（Cursor 定价）</a>、<a href="https://www.cloudzero.com/blog/google-antigravity-pricing/">CloudZero（Antigravity 定价）</a>、<a href="https://www.layer3labs.io/guides/deepseek-v4-1-flash-explained">Layer3 Labs（V4.1-Flash 解读）</a>、<a href="https://venturebeat.com/technology/deepseek-harness-launches-as-open-source-rival-to-claude-code-alongside-v4-pro-on-api-with-higher-prices">VentureBeat（Harness 上线）</a></li>
+        </ul>
+        <p class="foot-note">本页为 2026 年 11 月 22 日的静态快照：价格、版本与套餐此后如有变化，以各官方页面为准。文中标注「厂商公布」的基准成绩未经独立复现；标注「二手来源」的内容已经多源交叉，但仍建议在付费或换档前到官方页面复核。</p>
+      </footer>
+
+    </div>
+
+    <script>
+      // ---- DeepSeek price chart, drawn from the single data array below ----
+      (function () {
+        var DATA = [
+          { model: "deepseek-flash", note: "V4.1-Flash-1017", inputOff: 0.15, inputPeak: 0.30, outputOff: 0.60, outputPeak: 1.20 },
+          { model: "deepseek-v4-pro", note: "V4-Pro-0813", inputOff: 0.66, inputPeak: 1.32, outputOff: 1.98, outputPeak: 3.96 }
+        ];
+        var MAX = 4; // domain derived from data max 3.96, rounded up to next whole dollar
+        var W = 720, labelW = 168, plotW = W - labelW - 64;
+        var rowH = 26, groupGap = 20, topPad = 26, axisH = 24;
+        var rowsPerModel = 4;
+        var H = topPad + DATA.length * rowsPerModel * rowH + (DATA.length - 1) * groupGap + axisH + 8;
+        var cs = getComputedStyle(document.documentElement);
+        var cIn = cs.getPropertyValue("--chart-input").trim();
+        var cOut = cs.getPropertyValue("--chart-output").trim();
+        var cInk = cs.getPropertyValue("--ink-2").trim();
+        var cInk3 = cs.getPropertyValue("--ink-3").trim();
+        var cLine = cs.getPropertyValue("--line").trim();
+
+        function fmt(v) { return "$" + v.toFixed(2); }
+        var s = '<svg viewBox="0 0 ' + W + " " + H + '" width="100%" role="presentation" aria-hidden="true">';
+        // gridlines + axis ticks 0..4
+        for (var t = 0; t <= MAX; t++) {
+          var gx = labelW + (t / MAX) * plotW;
+          s += '<line x1="' + gx + '" y1="' + (topPad - 8) + '" x2="' + gx + '" y2="' + (H - axisH) + '" stroke="' + cLine + '" stroke-width="1"/>';
+          s += '<text x="' + gx + '" y="' + (H - 6) + '" font-size="12" fill="' + cInk3 + '" text-anchor="middle">$' + t + "</text>";
+        }
+        var labels = ["输入 · 非高峰", "输入 · 高峰", "输出 · 非高峰", "输出 · 高峰"];
+        var y = topPad;
+        DATA.forEach(function (d, gi) {
+          var vals = [
+            { v: d.inputOff, c: cIn, peak: false },
+            { v: d.inputPeak, c: cIn, peak: true },
+            { v: d.outputOff, c: cOut, peak: false },
+            { v: d.outputPeak, c: cOut, peak: true }
+          ];
+          // model group label
+          s += '<text x="0" y="' + (y - 8) + '" font-size="13.5" font-weight="700" fill="' + cInk + '">' + d.model + ' <tspan font-weight="400" fill="' + cInk3 + '">(' + d.note + ")</tspan></text>";
+          vals.forEach(function (r, ri) {
+            var bw = Math.max(2, (r.v / MAX) * plotW);
+            s += '<text x="' + (labelW - 10) + '" y="' + (y + 16) + '" font-size="12.5" fill="' + cInk + '" text-anchor="end">' + labels[ri] + "</text>";
+            s += '<rect x="' + labelW + '" y="' + (y + 3) + '" width="' + bw + '" height="17" rx="2" fill="' + r.c + '" fill-opacity="' + (r.peak ? 0.45 : 1) + '"/>';
+            s += '<text x="' + (labelW + bw + 8) + '" y="' + (y + 16) + '" font-size="12.5" font-weight="600" fill="' + cInk + '">' + fmt(r.v) + "</text>";
+            y += rowH;
+          });
+          y += groupGap;
+        });
+        s += "</svg>";
+        document.getElementById("price-chart").innerHTML = s;
+      })();
+
+      // ---- copy buttons ----
+      document.querySelectorAll("[data-copy]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var text = btn.getAttribute("data-copy");
+          function done() {
+            var old = btn.textContent;
+            btn.textContent = "已复制";
+            setTimeout(function () { btn.textContent = old; }, 1600);
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done, done);
+          } else {
+            var ta = document.createElement("textarea");
+            ta.value = text; document.body.appendChild(ta); ta.select();
+            try { document.execCommand("copy"); } catch (e) {}
+            document.body.removeChild(ta); done();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
