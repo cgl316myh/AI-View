@@ -1037,8 +1037,8 @@
           <li><strong>Kimi ¥15 体验金有效期、GLM-5.2 的专属免费额度：</strong>前者来源冲突，后者未核实到——表里都按存疑 / 未核实标注。</li>
           <li><strong>Nous Portal 是否收国内发行的卡、有无地区限制：</strong>官方未公布，未实测。</li>
         </ul>
-        <h3 class="sub">编程推荐排序：国内、国外各一张</h3>
-        <p>下面是按本页已核实信息排的<strong>推荐顺序，不是跑分名次</strong>：综合看编程基准、API 价格、上下文长度和配套工具。先提醒一句——各家的基准用的测试集和 harness 都不一样（DeepSWE、SWE-Bench、Terminal-Bench 不是一回事），<strong>数字不能跨行直接比大小</strong>，排序靠的是综合判断。国内八个都能官方直达、人民币付款，差别只在强弱和价格；国外四个里除自托管的 Hermes 外，官方都不支持中国大陆，这张表只对有条件使用的人有意义。</p>
+        <h3 class="sub">编程排序：国内、国外各一张推荐表，外加一张只看能力的全球混合榜</h3>
+        <p>下面两张是按本页已核实信息排的<strong>推荐顺序，不是跑分名次</strong>：综合看编程基准、API 价格、上下文长度和配套工具。先提醒一句——各家的基准用的测试集和 harness 都不一样（DeepSWE、SWE-Bench、Terminal-Bench 不是一回事），<strong>数字不能跨行直接比大小</strong>，排序靠的是综合判断。国内八个都能官方直达、人民币付款，差别只在强弱和价格；国外四个里除自托管的 Hermes 外，官方都不支持中国大陆，这张表只对有条件使用的人有意义。两张表之后还有一张<strong>全球混合榜</strong>：把 12 个放进同一张表，只按编程能力排，价格、地区、支付、上下文一概不计。</p>
         <div class="tbl-wrap breakout">
           <table class="cmp-table">
             <caption>国内大模型 · 编程推荐排序（核查于 2026-11-22；价格为 API 每百万 token 输入 / 输出）</caption>
@@ -1165,6 +1165,108 @@
                 <td data-label="编程基准"><div>未核实到可比的公开数据</div></td>
                 <td data-label="API 价格"><div>自托管 $0</div></td>
                 <td data-label="上下文"><div>512K</div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 class="sub">全球混合排名：12 个模型放进同一张表，只看编程能力</h3>
+        <p>这一张和上面两张推荐表的区别是<strong>只认编程能力，其他因素全部剔除</strong>：价格贵不贵、国内能不能官方用、能不能人民币付款、上下文多长，都不影响名次。口径必须先说清：这 12 个里，<strong>只有 Claude Opus 5.5 和 Kimi K3.1 Pro 在同一个基准（Terminal-Bench 4.0）上有可直接对比的数字</strong>，第 1、2 名就是按这个定的（66.4% 对 65.7%）；其余名次按各模型能拿到的最强公开编程证据排——证据是厂商自报的都已注明，没有公开编程基准的排在后面的一组，组内顺序只是定位判断。<strong>排在后面表示「没有证据可排」，不等于已经证明更弱</strong>；等有同口径的独立测试，这个顺序应当重排。</p>
+        <div class="tbl-wrap breakout">
+          <table class="cmp-table">
+            <caption>全球编程大模型混合排名（国内 8 + 国外 4，共 12 个）· 只按编程能力排 · 核查于 2026-11-22</caption>
+            <thead>
+              <tr>
+                <th>全球排名</th>
+                <th>模型</th>
+                <th>归属</th>
+                <th>编程基准（口径）</th>
+                <th>排位依据</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="全球排名"><div><strong>1</strong></div></td>
+                <td class="mname">Claude Opus 5.5<span class="ven">Anthropic · 顶配为 Fable 5.2 / Mythos 5.2</span></td>
+                <td data-label="归属"><div>国外</div></td>
+                <td data-label="编程基准"><div>Terminal-Bench 4.0 66.4%（Moonshot 对比口径）</div></td>
+                <td data-label="排位依据"><div>同口径对比里的最高分；Anthropic 官方定位的编程日用主力（顶配 Fable 5.2 在其之上，但官方给编程场景推荐的仍是 Opus 5.5）。</div></td>
+              </tr>
+              <tr>
+                <td data-label="全球排名"><div><strong>2</strong></div></td>
+                <td class="mname">Kimi K3.1 Pro<span class="ven">月之暗面 Moonshot · Kimi Code 驱动模型</span></td>
+                <td data-label="归属"><div>国内</div></td>
+                <td data-label="编程基准"><div>Terminal-Bench 4.0 65.7%（厂商自报）</div></td>
+                <td data-label="排位依据"><div>与第 1 名同一个基准、只差 0.7 个百分点——这是全表唯一一对能严格比大小的名次；也是国内模型里唯一有同口径顶尖分数的。</div></td>
+              </tr>
+              <tr>
+                <td data-label="全球排名"><div><strong>3</strong></div></td>
+                <td class="mname">GPT-5.6 Sol<span class="ven">OpenAI · 经 Codex / API / ChatGPT；同系有 Terra / Luna</span></td>
+                <td data-label="归属"><div>国外</div></td>
+                <td data-label="编程基准"><div>未核实到可比的公开数据</div></td>
+                <td data-label="排位依据"><div>OpenAI 当前旗舰、Codex 的主力模型，按旗舰定位列入第一梯队末尾；没有同口径分数，这个名次是定位判断，不是跑分结果。</div></td>
+              </tr>
+              <tr>
+                <td data-label="全球排名"><div><strong>4</strong></div></td>
+                <td class="mname">DeepSeek V4.1-Flash-1017<span class="ven">DeepSeek · 同系旗舰为 V4-Pro</span></td>
+                <td data-label="归属"><div>国内</div></td>
+                <td data-label="编程基准"><div>DeepSWE v1.1 77.0%（厂商）；Terminal-Bench 4.0 厂商口径 42.3%、独立测 31.82%（Vals.ai，harness 不同）</div></td>
+                <td data-label="排位依据"><div>全表唯一有独立第三方复测的模型，能力有据可查；但它在 Terminal-Bench 4.0 上的数字与第 1、2 名的 65%+ 有明显差距，列第二梯队之首。</div></td>
+              </tr>
+              <tr>
+                <td data-label="全球排名"><div><strong>5</strong></div></td>
+                <td class="mname">Qwen3-Coder-Next<span class="ven">阿里 · 托管旗舰为 Qwen4-Max</span></td>
+                <td data-label="归属"><div>国内</div></td>
+                <td data-label="编程基准"><div>SWE-Bench Verified 约 70.6–71.3%（厂商口径，不同 harness 有浮动）</div></td>
+                <td data-label="排位依据"><div>专用编程模型里分数最高的一档；但 SWE-Bench 与 Terminal-Bench 不是同一套题，无法和前面的名次折算，只能按证据强度列在这里。</div></td>
+              </tr>
+              <tr>
+                <td data-label="全球排名"><div><strong>6</strong></div></td>
+                <td class="mname">GLM-5.3<span class="ven">智谱 AI · 另有 GLM-5.3-Flash</span></td>
+                <td data-label="归属"><div>国内</div></td>
+                <td data-label="编程基准"><div>Terminal-Bench 3.0 28.3；Z.ai Code Bench 比 5.2 高约 50%（均为厂商口径）</div></td>
+                <td data-label="排位依据"><div>比上一代的进步幅度有厂商数据支撑；但 Terminal-Bench 3.0 与 4.0 不是同一套题，28.3 不能和前面的 4.0 分数直接比。</div></td>
+              </tr>
+              <tr>
+                <td data-label="全球排名"><div><strong>7</strong></div></td>
+                <td class="mname">MiniMax M3<span class="ven">MiniMax · 另有走量型号 M3.1-Flash</span></td>
+                <td data-label="归属"><div>国内</div></td>
+                <td data-label="编程基准"><div>SWE-Bench Pro 59.0%（厂商口径）</div></td>
+                <td data-label="排位依据"><div>有明确的编程基准分数；SWE-Bench Pro 与 Verified、Terminal-Bench 口径都不同，按证据强度列在 GLM 之后。</div></td>
+              </tr>
+              <tr>
+                <td data-label="全球排名"><div><strong>8</strong></div></td>
+                <td class="mname">Gemini 3.8 Flash<span class="ven">Google · 在 Antigravity 中使用；另有 Gemini 3 Flash</span></td>
+                <td data-label="归属"><div>国外</div></td>
+                <td data-label="编程基准"><div>未核实到可比的公开数据</div></td>
+                <td data-label="排位依据"><div>Google 的 Flash 档模型，定位本就在自家旗舰之下；没有同口径分数，按定位列入——这是自本名次起证据开始变弱的分界。</div></td>
+              </tr>
+              <tr>
+                <td data-label="全球排名"><div><strong>9</strong></div></td>
+                <td class="mname">Doubao-Seed-2.0-Code<span class="ven">字节跳动 · 经火山引擎 Ark 与 Trae</span></td>
+                <td data-label="归属"><div>国内</div></td>
+                <td data-label="编程基准"><div>未核实到可比的公开数据</div></td>
+                <td data-label="排位依据"><div>字节的编程专长版模型，定位是纯编程；但本页来源里没有任何可核的编程基准，只能进「无证据」组，按专长定位排在组内第一。</div></td>
+              </tr>
+              <tr>
+                <td data-label="全球排名"><div><strong>10</strong></div></td>
+                <td class="mname">混元 Hy3<span class="ven">腾讯 · 经腾讯云 TokenHub 与 WorkBuddy / CodeBuddy</span></td>
+                <td data-label="归属"><div>国内</div></td>
+                <td data-label="编程基准"><div>未核实到可比的公开数据</div></td>
+                <td data-label="排位依据"><div>通用旗舰、同时是腾讯编程产品的底座；没有公开编程基准可核，列「无证据」组。</div></td>
+              </tr>
+              <tr>
+                <td data-label="全球排名"><div><strong>11</strong></div></td>
+                <td class="mname">ERNIE 5.1<span class="ven">百度 · 经千帆平台，编程产品为 Comate</span></td>
+                <td data-label="归属"><div>国内</div></td>
+                <td data-label="编程基准"><div>无编程口径数据（发布时 Arena Search 1,223 是搜索榜，不是编程成绩）</div></td>
+                <td data-label="排位依据"><div>唯一拿得出的公开数字不是编程成绩，列「无证据」组末尾。</div></td>
+              </tr>
+              <tr>
+                <td data-label="全球排名"><div><strong>12</strong></div></td>
+                <td class="mname">Hermes 4.3（36B）<span class="ven">Nous Research · 开源权重</span></td>
+                <td data-label="归属"><div>国外</div></td>
+                <td data-label="编程基准"><div>未核实到可比的公开数据</div></td>
+                <td data-label="排位依据"><div>36B 开源权重模型，参数规模比其余 11 个小一个量级，编程能力上限不在同一档；列末位是规模与定位判断。</div></td>
               </tr>
             </tbody>
           </table>
