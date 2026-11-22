@@ -619,7 +619,7 @@
           <h2>国内支付与可用性对照表</h2><span class="en">在国内，到底能不能用、怎么付钱</span>
         </div>
         <p class="verdict">结论先行：<strong>国内官方直达、人民币结算、微信和支付宝都支持的只有三家——DeepSeek、智谱 GLM、月之暗面 Kimi。</strong>OpenAI、Anthropic、Google 三家则是官方地区名单里根本没有中国大陆，属于「地区不支持」，不是换张卡能解决的问题。</p>
-        <p>除了你点的列（模型、价格、国内可用、微信、支付宝、国内银行卡），我另加了五列：<strong>是否需要海外卡/账号</strong>（决定你会不会卡在最后一步）、<strong>结算币种与平台</strong>（人民币国内平台还是美元海外平台）、<strong>免费额度</strong>、<strong>上下文长度</strong>，以及最后一列<strong>「在国内最实际的入手方式」</strong>——前面都是事实，这列是结论。价格为 API 每百万 token 的输入 / 输出价，核查于 2026-11-22；标「存疑」的格子是来源冲突或官方未明说，别按确定结论用。</p>
+        <p>除了你点的列（模型、价格、国内可用、支付方式），我另加了五列：<strong>是否需要海外卡/账号</strong>（决定你会不会卡在最后一步）、<strong>结算币种与平台</strong>（人民币国内平台还是美元海外平台）、<strong>免费额度</strong>、<strong>上下文长度</strong>，以及最后一列<strong>「在国内最实际的入手方式」</strong>——前面都是事实，这列是结论。价格为 API 每百万 token 的输入 / 输出价，核查于 2026-11-22；标「存疑」的格子是来源冲突或官方未明说，别按确定结论用。</p>
         <ul class="points">
           <li><strong>腾讯混元 Hy3 也是国内平台、人民币</strong>，但有个细节：腾讯云官方在线充值清单是微信、QQ 钱包、网银，<strong>没有列支付宝</strong>；WorkBuddy 订阅在官方文档里只显示微信扫码。</li>
           <li><strong>Cursor / Composer 2.5 是灰色地带：</strong>支付宝在旧 Pro 的结账里出现过，但 2026 年 11 月换成 X 订阅后，Cursor 官方论坛明确说新订阅<strong>不支持支付宝</strong>；是否需要代理访问其 AI 端点，来源也互相矛盾。</li>
@@ -634,9 +634,7 @@
                 <th>模型（厂商）</th>
                 <th>API 价格（输入 / 输出）</th>
                 <th>国内直连</th>
-                <th>微信支付</th>
-                <th>支付宝</th>
-                <th>国内发行银行卡</th>
+                <th>支付方式</th>
                 <th>需海外卡 / 账号</th>
                 <th>结算币种 · 平台</th>
                 <th>免费额度</th>
@@ -649,9 +647,7 @@
                 <td class="mname">DeepSeek V4.1-Flash / V4-Pro<span class="ven">DeepSeek（杭州）· <code>deepseek-flash</code> / <code>deepseek-v4-pro</code></span></td>
                 <td data-label="API 价格"><div>Flash 非高峰 $0.15 / $0.60，高峰翻倍 $0.30 / $1.20（缓存命中 $0.003）；Pro 非高峰 $0.66 / $1.98，高峰 $1.32 / $3.96<span class="cnote">官方价格页原文</span></div></td>
                 <td data-label="国内直连"><div><span class="st yes">✓ 支持</span><span class="cnote">国内厂商，官方服务直达</span></div></td>
-                <td data-label="微信支付"><div><span class="st yes">✓ 支持</span></div></td>
-                <td data-label="支付宝"><div><span class="st yes">✓ 支持</span><span class="cnote">官方 FAQ 明列支付宝与微信</span></div></td>
-                <td data-label="国内发行银行卡"><div><span class="st yes">✓ 支持</span><span class="cnote">英文 FAQ 写有「银行卡」，但未点名卡组织；中文 FAQ 只列支付宝/微信，纯银联卡能否充值未明说</span></div></td>
+                <td data-label="支付方式"><div>微信 <span class="st yes">✓ 支持</span> · 支付宝 <span class="st yes">✓ 支持</span> · 国内银行卡 <span class="st yes">✓ 支持</span><span class="cnote">官方 FAQ 明列支付宝与微信；英文 FAQ 写有「银行卡」，但未点名卡组织，中文 FAQ 只列支付宝/微信，纯银联卡能否充值未明说</span></div></td>
                 <td data-label="需海外卡 / 账号"><div><span class="st yes">不需要</span></div></td>
                 <td data-label="结算币种 · 平台"><div>英文页以美元标价，账户余额按人民币或美元显示<span class="cnote">国内平台 platform.deepseek.com</span></div></td>
                 <td data-label="免费额度"><div>网页 / App 聊天免费；API 为预充值，未核实到公开的免费 API 额度</div></td>
@@ -662,9 +658,7 @@
                 <td class="mname">GPT-5.6 Sol / Terra / Luna<span class="ven">OpenAI · 经 Codex / API / ChatGPT</span></td>
                 <td data-label="API 价格"><div>Sol $4 / $20（促销价，原标价 $5 / $30）；Terra $2 / $12；Luna $0.20 / $1.20<span class="cnote">二手来源；输入超 272K 时输入按 2 倍、输出按 1.5 倍计</span></div></td>
                 <td data-label="国内直连"><div><span class="st no">✗ 不支持</span><span class="cnote">官方支持地区名单（208 个）不含中国大陆及港澳</span></div></td>
-                <td data-label="微信支付"><div><span class="st no">✗ 不支持</span></div></td>
-                <td data-label="支付宝"><div><span class="st no">✗ 不支持</span></div></td>
-                <td data-label="国内发行银行卡"><div><span class="st no">✗ 不支持</span><span class="cnote">卡必须由受支持国家的银行发行——国内发行的双币 Visa/Mastercard 也是国内卡，过不了这一关</span></div></td>
+                <td data-label="支付方式"><div>微信 <span class="st no">✗ 不支持</span> · 支付宝 <span class="st no">✗ 不支持</span> · 国内银行卡 <span class="st no">✗ 不支持</span><span class="cnote">卡必须由受支持国家的银行发行——国内发行的双币 Visa/Mastercard 也是国内卡，过不了这一关</span></div></td>
                 <td data-label="需海外卡 / 账号"><div><span class="st no">需要</span><span class="cnote">海外发行卡 + 在受支持地区使用</span></div></td>
                 <td data-label="结算币种 · 平台"><div>美元<span class="cnote">海外平台（OpenAI / Stripe）</span></div></td>
                 <td data-label="免费额度"><div>ChatGPT 免费层仅存在于受支持地区；国内无官方通道，未核实到免费 API 额度</div></td>
@@ -675,9 +669,7 @@
                 <td class="mname">Composer 2.5<span class="ven">Cursor（Anysphere）· 底座为月之暗面 Kimi K2.5</span></td>
                 <td data-label="API 价格"><div>按量：Standard $0.50 / $2.50，Fast $3 / $15；订阅（2026 年 11 月新体系）：Free $0 / Plus $8 / Premium $30 / Super $100 / Ultra $200，旧 Pro $20 仅老用户<span class="cnote">Cursor 官方</span></div></td>
                 <td data-label="国内直连"><div><span class="st mid">？ 存疑</span><span class="cnote">未找到官方地区名单；一份 2026-10 的国内使用指南称其 AI 端点需要代理</span></div></td>
-                <td data-label="微信支付"><div><span class="st no">✗ 不支持</span><span class="cnote">结账渠道未见微信</span></div></td>
-                <td data-label="支付宝"><div><span class="st mid">？ 存疑</span><span class="cnote">旧 Pro 结账曾支持（多份 2025–26 指南）；但官方论坛明确说新 X 订阅不支持支付宝</span></div></td>
-                <td data-label="国内发行银行卡"><div><span class="st mid">？ 部分</span><span class="cnote">国内双币 Visa/Mastercard 有成功案例、看发卡行；纯银联卡不支持（Stripe）</span></div></td>
+                <td data-label="支付方式"><div>微信 <span class="st no">✗ 不支持</span> · 支付宝 <span class="st mid">？ 存疑</span> · 国内银行卡 <span class="st mid">？ 部分</span><span class="cnote">微信：结账渠道未见微信。支付宝：旧 Pro 结账曾支持（多份 2025–26 指南），但官方论坛明确说新 X 订阅不支持支付宝。银行卡：国内双币 Visa/Mastercard 有成功案例、看发卡行；纯银联卡不支持（Stripe）</span></div></td>
                 <td data-label="需海外卡 / 账号"><div><span class="st mid">部分需要</span><span class="cnote">规则上不强制，但新套餐实际以 Visa/Mastercard 最可靠</span></div></td>
                 <td data-label="结算币种 · 平台"><div>美元<span class="cnote">海外平台（Stripe，新订阅经 X 订阅体系结算）</span></div></td>
                 <td data-label="免费额度"><div>Free 档含有限额度的 Agent / Chat / Tab，含 Composer 在内的 Cursor 自研模型可用</div></td>
@@ -688,9 +680,7 @@
                 <td class="mname">Gemini 3 Flash / 3.8 Flash<span class="ven">Google · 在 Antigravity 中使用</span></td>
                 <td data-label="API 价格"><div>API：3 Flash $0.50 / $3；3.8 Flash $0.75 / $3.75（优惠价至 2026-12-31，之后 $1.50 / $7.50）。Antigravity 走 Google AI：免费 $0 / AI Pro $19.99 / Ultra $99.99（5×）· $199.99（20×）<span class="cnote">二手来源汇总</span></div></td>
                 <td data-label="国内直连"><div><span class="st no">✗ 不支持</span><span class="cnote">Antigravity、Gemini API / AI Studio、AI Pro/Ultra 的地区名单均不含中国大陆；Gemini 网页版在大陆仅限 Workspace</span></div></td>
-                <td data-label="微信支付"><div><span class="st no">✗ 不支持</span></div></td>
-                <td data-label="支付宝"><div><span class="st no">✗ 不支持</span><span class="cnote">Google Play 里的支付宝香港 / 银联是港澳地区功能，不适用于大陆 AI 订阅</span></div></td>
-                <td data-label="国内发行银行卡"><div><span class="st no">✗ 不支持</span><span class="cnote">需要受支持国家的 Google 付款资料，大陆付款资料无法开通</span></div></td>
+                <td data-label="支付方式"><div>微信 <span class="st no">✗ 不支持</span> · 支付宝 <span class="st no">✗ 不支持</span> · 国内银行卡 <span class="st no">✗ 不支持</span><span class="cnote">Google Play 里的支付宝香港 / 银联是港澳地区功能，不适用于大陆 AI 订阅；银行卡需要受支持国家的 Google 付款资料，大陆付款资料无法开通</span></div></td>
                 <td data-label="需海外卡 / 账号"><div><span class="st no">需要</span><span class="cnote">受支持国家的 Google 账号 + 付款资料 + 该国发行的卡</span></div></td>
                 <td data-label="结算币种 · 平台"><div>美元（按付款资料所在国显示当地币种）<span class="cnote">海外平台（Google One / Google Play）</span></div></td>
                 <td data-label="免费额度"><div>Antigravity 免费层有每周 agent 额度；自 2026-11-18 起免费层只有 Gemini 3.8 Flash。Gemini API 免费层仅限受支持地区</div></td>
@@ -701,9 +691,7 @@
                 <td class="mname">Claude Sonnet 5.5 / Opus 5.5<span class="ven">Anthropic · 直连 API，或在 Cursor / Antigravity 内</span></td>
                 <td data-label="API 价格"><div>Sonnet 5.5 $2 / $10；Opus 5.5 $4 / $20；订阅 Claude Pro $20/月，Max $100 起<span class="cnote">二手来源，已与 2026-11-13 官方价目核对</span></div></td>
                 <td data-label="国内直连"><div><span class="st no">✗ 不支持</span><span class="cnote">官方政策（2026-11-12 生效）：直连产品与经云平台、授权经销商提供的 Claude 用同一份地区名单，中国大陆及港澳均不在内</span></div></td>
-                <td data-label="微信支付"><div><span class="st no">✗ 不支持</span><span class="cnote">直连仅接受信用卡 / 借记卡</span></div></td>
-                <td data-label="支付宝"><div><span class="st no">✗ 不支持</span><span class="cnote">直连不支持；结账页出现银联标志只说明支付通道能收，不改变地区资格</span></div></td>
-                <td data-label="国内发行银行卡"><div><span class="st no">✗ 不支持</span><span class="cnote">账单地址须与发卡国一致且属于受支持的计费地区，国内卡按发卡地被拒</span></div></td>
+                <td data-label="支付方式"><div>微信 <span class="st no">✗ 不支持</span> · 支付宝 <span class="st no">✗ 不支持</span> · 国内银行卡 <span class="st no">✗ 不支持</span><span class="cnote">直连仅接受信用卡 / 借记卡；支付宝直连不支持，结账页出现银联标志只说明支付通道能收，不改变地区资格；银行卡账单地址须与发卡国一致且属于受支持的计费地区，国内卡按发卡地被拒</span></div></td>
                 <td data-label="需海外卡 / 账号"><div><span class="st no">需要</span></div></td>
                 <td data-label="结算币种 · 平台"><div>美元<span class="cnote">海外平台（Anthropic / Stripe；间接使用时由宿主工具代收）</span></div></td>
                 <td data-label="免费额度"><div>新 API 用户有少量免费额度、Claude 有免费层——均仅限受支持地区</div></td>
@@ -714,9 +702,7 @@
                 <td class="mname">GLM-5.2<span class="ven">智谱 AI · 经 bigmodel.cn，或 WorkBuddy / CodeBuddy</span></td>
                 <td data-label="API 价格"><div>国内 ¥8 / ¥28（缓存命中 ¥2）；国际版 z.ai $1.40 / $4.40<span class="cnote">官方定价页（二手转述核对）</span></div></td>
                 <td data-label="国内直连"><div><span class="st yes">✓ 支持</span></div></td>
-                <td data-label="微信支付"><div><span class="st yes">✓ 支持</span><span class="cnote">官方《充值协议》第 5.1 条明示「目前支持支付宝和微信」</span></div></td>
-                <td data-label="支付宝"><div><span class="st yes">✓ 支持</span><span class="cnote">同左</span></div></td>
-                <td data-label="国内发行银行卡"><div><span class="st yes">✓ 支持</span><span class="cnote">国内平台；官方充值协议对第三方支付只点名支付宝/微信</span></div></td>
+                <td data-label="支付方式"><div>微信 <span class="st yes">✓ 支持</span> · 支付宝 <span class="st yes">✓ 支持</span> · 国内银行卡 <span class="st yes">✓ 支持</span><span class="cnote">官方《充值协议》第 5.1 条明示「目前支持支付宝和微信」；银行卡为国内平台，官方充值协议对第三方支付只点名支付宝/微信</span></div></td>
                 <td data-label="需海外卡 / 账号"><div><span class="st yes">不需要</span></div></td>
                 <td data-label="结算币种 · 平台"><div>人民币<span class="cnote">国内平台 open.bigmodel.cn；国际版 z.ai 为美元</span></div></td>
                 <td data-label="免费额度"><div>bigmodel 上旧款 GLM-Flash 系列免费；未核实到 GLM-5.2 本身的免费额度。WorkBuddy 免费版每月 500 积分（见 Hy3 行）</div></td>
@@ -727,9 +713,7 @@
                 <td class="mname">Kimi K2.5 / K2.7-Code / K3<span class="ven">月之暗面 Moonshot AI</span></td>
                 <td data-label="API 价格"><div>K2.5 ¥4 / ¥21（缓存命中 ¥0.70）；现行编程线 K2.7-Code ¥6.50 / ¥27；旗舰 K3 ¥20 / ¥100<span class="cnote">二手来源，引官方定价页</span></div></td>
                 <td data-label="国内直连"><div><span class="st yes">✓ 支持</span><span class="cnote">平台本身支持；但 K2.5 已是旧型号，见入手方式</span></div></td>
-                <td data-label="微信支付"><div><span class="st yes">✓ 支持</span><span class="cnote">官方文档：个人用户微信 / 支付宝扫码充值</span></div></td>
-                <td data-label="支付宝"><div><span class="st yes">✓ 支持</span><span class="cnote">同左；企业还可对公转账</span></div></td>
-                <td data-label="国内发行银行卡"><div><span class="st yes">✓ 支持</span><span class="cnote">经微信 / 支付宝 / 对公转账；官方未单列卡组织</span></div></td>
+                <td data-label="支付方式"><div>微信 <span class="st yes">✓ 支持</span> · 支付宝 <span class="st yes">✓ 支持</span> · 国内银行卡 <span class="st yes">✓ 支持</span><span class="cnote">官方文档：个人用户微信 / 支付宝扫码充值，企业还可对公转账；银行卡经微信 / 支付宝 / 对公转账，官方未单列卡组织</span></div></td>
                 <td data-label="需海外卡 / 账号"><div><span class="st yes">不需要</span></div></td>
                 <td data-label="结算币种 · 平台"><div>人民币<span class="cnote">国内平台 platform.kimi.com</span></div></td>
                 <td data-label="免费额度"><div><span class="st mid">？ 存疑</span><span class="cnote">有新用户 ¥15 体验金的说法，但有效期两处来源冲突（一说 3 个月，一说长期有效）</span></div></td>
@@ -740,9 +724,7 @@
                 <td class="mname">混元 Hy3<span class="ven">腾讯 · 经腾讯云 TokenHub 与 WorkBuddy</span></td>
                 <td data-label="API 价格"><div>TokenHub ¥1 / ¥4（缓存命中 ¥0.25）<span class="cnote">腾讯云 TokenHub 官方产品页</span></div></td>
                 <td data-label="国内直连"><div><span class="st yes">✓ 支持</span></div></td>
-                <td data-label="微信支付"><div><span class="st yes">✓ 支持</span><span class="cnote">腾讯云官方在线充值清单含微信（单笔 / 单日限额 ¥50,000）</span></div></td>
-                <td data-label="支付宝"><div><span class="st no">✗ 未列出</span><span class="cnote">腾讯云官方在线充值清单为微信、QQ 钱包、网银——没有支付宝；个别第三方代充攻略的说法与官方清单冲突，以官方为准，别默认能用</span></div></td>
-                <td data-label="国内发行银行卡"><div><span class="st yes">✓ 支持</span><span class="cnote">经网银支付 / 微信绑卡</span></div></td>
+                <td data-label="支付方式"><div>微信 <span class="st yes">✓ 支持</span> · 支付宝 <span class="st no">✗ 未列出</span> · 国内银行卡 <span class="st yes">✓ 支持</span><span class="cnote">微信：腾讯云官方在线充值清单含微信（单笔 / 单日限额 ¥50,000）。支付宝：腾讯云官方在线充值清单为微信、QQ 钱包、网银——没有支付宝；个别第三方代充攻略的说法与官方清单冲突，以官方为准，别默认能用。银行卡：经网银支付 / 微信绑卡</span></div></td>
                 <td data-label="需海外卡 / 账号"><div><span class="st yes">不需要</span></div></td>
                 <td data-label="结算币种 · 平台"><div>人民币<span class="cnote">国内平台（腾讯云）</span></div></td>
                 <td data-label="免费额度"><div>TokenHub 新用户每个模型 100 万 token 免费额度、有效期 1 年（二手转述官方文档）；hunyuan-lite 长期免费；WorkBuddy 免费版每月 500 积分</div></td>
@@ -753,9 +735,7 @@
                 <td class="mname">Hermes 4.3（36B）<span class="ven">Nous Research · 开源权重；Hermes Agent 另见上文专节</span></td>
                 <td data-label="API 价格"><div>自托管 $0（Apache-2.0 开源权重）。Nous Portal 托管：Free $0 / Plus $20 / Super $100 / Ultra $200，充值 $10 起<span class="cnote">Portal 为 Nous 官方对比页；4.3 本身未确认到托管按量价</span></div></td>
                 <td data-label="国内直连"><div><span class="st mid">？ 分情况</span><span class="cnote">自托管：权重本身无地区限制，但 huggingface.co 在大陆被墙，需镜像下载；Portal：未找到官方地区名单，存疑</span></div></td>
-                <td data-label="微信支付"><div><span class="st no">✗ 不支持</span><span class="cnote">指 Portal；自托管不涉及支付</span></div></td>
-                <td data-label="支付宝"><div><span class="st no">✗ 不支持</span><span class="cnote">同左</span></div></td>
-                <td data-label="国内发行银行卡"><div><span class="st mid">？ 存疑</span><span class="cnote">Portal 走 Stripe 卡支付，国内发行的卡能否通过未核实；自托管不涉及</span></div></td>
+                <td data-label="支付方式"><div>微信 <span class="st no">✗ 不支持</span> · 支付宝 <span class="st no">✗ 不支持</span> · 国内银行卡 <span class="st mid">？ 存疑</span><span class="cnote">均指 Portal，自托管不涉及支付；银行卡走 Stripe 卡支付，国内发行的卡能否通过未核实</span></div></td>
                 <td data-label="需海外卡 / 账号"><div><span class="st mid">分情况</span><span class="cnote">自托管不需要；Portal 付费档需要（Stripe、美元）</span></div></td>
                 <td data-label="结算币种 · 平台"><div>自托管无（自己的 GPU）；Portal 为美元<span class="cnote">海外平台（Stripe）</span></div></td>
                 <td data-label="免费额度"><div>模型本身免费；Portal Free 档只能用免费模型</div></td>
