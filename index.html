@@ -241,6 +241,33 @@
       .openq { background: var(--surface); border-radius: 6px; padding: 20px 24px 8px; margin: 16px 0; }
       .openq li { margin-bottom: 10px; }
 
+      /* collapsible follow section */
+      .follow-fold { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); overflow: hidden; }
+      .follow-fold > summary {
+        list-style: none; cursor: pointer; user-select: none;
+        display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap;
+        padding: 18px 20px; min-height: 56px;
+      }
+      .follow-fold > summary::-webkit-details-marker { display: none; }
+      .follow-fold > summary::marker { display: none; content: ""; }
+      .follow-fold > summary:hover { background: var(--surface-2); }
+      .follow-fold > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+      .follow-title-wrap { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; min-width: 0; }
+      .follow-title { font-family: "Noto Serif SC", serif; font-weight: 700; font-size: clamp(21px, 4vw, 26px); line-height: 1.3; color: var(--ink); margin: 0; display: inline; }
+      .follow-title-wrap .en { color: var(--ink-3); font-size: 14.5px; }
+      .follow-toggle { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; flex: none; }
+      .follow-hint { font-size: 13px; color: var(--ink-2); background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; line-height: 1.4; }
+      .follow-fold[open ] .follow-hint { color: var(--accent); border-color: var(--accent); }
+      .fold-chevron { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg); color: var(--ink-2); font-size: 15px; line-height: 1; transition: transform .18s ease; }
+      .follow-fold[open ] .fold-chevron { transform: rotate(180deg); }
+      .follow-body { background: var(--bg); border-top: 1px solid var(--line); padding: 6px 20px 20px; }
+      .follow-body > p:first-child { margin-top: 14px; }
+      @media (max-width: 640px) {
+        .follow-fold > summary { padding: 16px 16px; }
+        .follow-body { padding: 4px 16px 18px; }
+        .follow-toggle { margin-left: 0; }
+      }
+
 
       /* ---------- tab control ---------- */
       :root { --update: #d92d20; }
@@ -757,9 +784,12 @@
 
       <!-- ============ Follow ============ -->
       <section class="tool" id="follow">
-        <div class="tool-head">
-          <h2>怎么持续跟进，不靠刷新闻</h2><span class="en">每家只盯一个官方源头</span>
-        </div>
+        <details class="follow-fold">
+          <summary aria-label="展开或收起：怎么持续跟进，不靠刷新闻">
+            <span class="follow-title-wrap"><h2 class="follow-title">怎么持续跟进，不靠刷新闻</h2><span class="en">每家只盯一个官方源头</span></span>
+            <span class="follow-toggle"><span class="follow-hint">点击展开</span><span class="fold-chevron" aria-hidden="true">▾</span></span>
+          </summary>
+          <div class="follow-body">
         <p>这七项的共同规律是：<strong>版本与价格都变得很快，二手汇总经常过期或互相抄错</strong>（这次核查就发现了 DeepSeek 撤回路由安排、Hermes 4.3 日期被误传、Composer 默认档价格与宣传价不一致）。可靠的办法是只订阅每家的官方发布渠道，价格只认官方价格页：</p>
         <div class="channels">
           <div class="channel">
@@ -800,6 +830,8 @@
           <li><strong>基准数字先问「谁测的、用什么 harness」。</strong>同一个模型在厂商 harness 与独立 harness 下能差出 10 个百分点（见 DeepSeek 一节），不看测量条件的跑分没有参考价值。</li>
           <li><strong>每月固定 20 分钟过一遍上面六个源头。</strong>这七项在 2026 年的节奏大约是每月一个值得注意的变化，月度巡检足够；日报级刷资讯只会增加噪音。</li>
         </ul>
+          </div>
+        </details>
       </section>
 
       <!-- ============ Open questions ============ -->
@@ -958,6 +990,20 @@
           var tag = document.createElement('span'); tag.className = 'tab-new'; tag.textContent = '更新';
           t.appendChild(dot); t.appendChild(tag);
         };
+      })();
+    </script>
+    <script>
+      (function () {
+        var fold = document.querySelector('.follow-fold');
+        if (!fold) return;
+        var hint = fold.querySelector('.follow-hint');
+        function sync() { if (hint) hint.textContent = fold.open ? '点击收起' : '点击展开'; }
+        fold.addEventListener('toggle', sync);
+        sync();
+        // If user jumps via #follow link, expand so the content is visible
+        function checkHash() { if ((location.hash || '') === '#follow' && !fold.open) { fold.open = true; sync(); } }
+        window.addEventListener('hashchange', checkHash);
+        checkHash();
       })();
     </script>
   </body>
