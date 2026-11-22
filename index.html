@@ -1037,6 +1037,139 @@
           <li><strong>Kimi ¥15 体验金有效期、GLM-5.2 的专属免费额度：</strong>前者来源冲突，后者未核实到——表里都按存疑 / 未核实标注。</li>
           <li><strong>Nous Portal 是否收国内发行的卡、有无地区限制：</strong>官方未公布，未实测。</li>
         </ul>
+        <h3 class="sub">编程推荐排序：国内、国外各一张</h3>
+        <p>下面是按本页已核实信息排的<strong>推荐顺序，不是跑分名次</strong>：综合看编程基准、API 价格、上下文长度和配套工具。先提醒一句——各家的基准用的测试集和 harness 都不一样（DeepSWE、SWE-Bench、Terminal-Bench 不是一回事），<strong>数字不能跨行直接比大小</strong>，排序靠的是综合判断。国内八个都能官方直达、人民币付款，差别只在强弱和价格；国外四个里除自托管的 Hermes 外，官方都不支持中国大陆，这张表只对有条件使用的人有意义。</p>
+        <div class="tbl-wrap breakout">
+          <table class="cmp-table">
+            <caption>国内大模型 · 编程推荐排序（核查于 2026-11-22；价格为 API 每百万 token 输入 / 输出）</caption>
+            <thead>
+              <tr>
+                <th>排名</th>
+                <th>模型</th>
+                <th>为什么排在这里</th>
+                <th>编程基准（口径）</th>
+                <th>API 价格</th>
+                <th>上下文</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="排名"><div><strong>1</strong></div></td>
+                <td class="mname">DeepSeek V4.1-Flash-1017<span class="ven">DeepSeek · 同系旗舰为 V4-Pro</span></td>
+                <td data-label="推荐理由"><div>日常编程主力首选：本页国产模型里唯一有独立第三方复测的，1017 检查点又专门针对 Harness 优化过；第一梯队里价格最低。缺点是非高峰 / 高峰两套价，工作日白天翻倍。</div></td>
+                <td data-label="编程基准"><div>DeepSWE v1.1 77.0%（厂商）；Terminal-Bench 4.0 独立测 31.82%（Vals.ai，harness 不同）</div></td>
+                <td data-label="API 价格"><div>Flash $0.15 / $0.60（非高峰）；Pro $0.66 / $1.98</div></td>
+                <td data-label="上下文"><div>1M</div></td>
+              </tr>
+              <tr>
+                <td data-label="排名"><div><strong>2</strong></div></td>
+                <td class="mname">Kimi K3.1 Pro<span class="ven">月之暗面 Moonshot · Kimi Code 驱动模型</span></td>
+                <td data-label="推荐理由"><div>难任务与长程 agent 的首选：厂商自报成绩已贴近 Claude Opus 5.5，Kimi Code（CLI / 插件 / 桌面端）也已成型。但价格比 DeepSeek 贵一个量级，适合只在难题上花。</div></td>
+                <td data-label="编程基准"><div>Terminal-Bench 4.0 65.7%（厂商自报，Opus 5.5 同口径 66.4%）</div></td>
+                <td data-label="API 价格"><div>$2 / $10（缓存命中 $0.20）</div></td>
+                <td data-label="上下文"><div>1M</div></td>
+              </tr>
+              <tr>
+                <td data-label="排名"><div><strong>3</strong></div></td>
+                <td class="mname">GLM-5.3<span class="ven">智谱 AI · 另有 GLM-5.3-Flash</span></td>
+                <td data-label="推荐理由"><div>订阅制重度使用的首选：5.3 靠扩大后训练比 5.2 明显进步，GLM Coding Plan 包月（Lite $18/月起，2026-07-30 起改积分制）成本可控，不必盯着 token 账单。</div></td>
+                <td data-label="编程基准"><div>Z.ai Code Bench 比 5.2 高约 50%；Terminal-Bench 3.0 28.3（均为厂商口径）</div></td>
+                <td data-label="API 价格"><div>$1.40 / $4.40</div></td>
+                <td data-label="上下文"><div>1M（与 5.2 同底座）</div></td>
+              </tr>
+              <tr>
+                <td data-label="排名"><div><strong>4</strong></div></td>
+                <td class="mname">Qwen3-Coder-Next<span class="ven">阿里 · 托管旗舰为 Qwen4-Max</span></td>
+                <td data-label="推荐理由"><div>开源自托管的首选：Apache-2.0 权重免费、能本地或私有部署，数据不出内网；要托管旗舰就用 11 月 16 日的 Qwen4-Max。代价是专用编程线还停在 2 月的这一代。</div></td>
+                <td data-label="编程基准"><div>SWE-Bench Verified 约 70.6–71.3%（厂商口径，不同 harness 有浮动）</div></td>
+                <td data-label="API 价格"><div>开源权重免费；Qwen4-Max $1.50 / $4.50</div></td>
+                <td data-label="上下文"><div>Coder-Next 256K；Qwen4-Max 1M</div></td>
+              </tr>
+              <tr>
+                <td data-label="排名"><div><strong>5</strong></div></td>
+                <td class="mname">MiniMax M3.1-Flash / M3<span class="ven">MiniMax · M3 为旗舰</span></td>
+                <td data-label="推荐理由"><div>低价备选：M3.1-Flash（10 月 19 日转正式版）与 DeepSeek Flash 同价位，M3 本身是 1M 上下文的原生多模态旗舰。注意旧版 M2.5 / M2.7 已于 11 月 18 日退役、流量自动转到 M3.1-Flash。</div></td>
+                <td data-label="编程基准"><div>M3：SWE-Bench Pro 59.0%（厂商口径）</div></td>
+                <td data-label="API 价格"><div>M3.1-Flash $0.15 / $0.60；M3 $0.30 / $1.20</div></td>
+                <td data-label="上下文"><div>M3 1M</div></td>
+              </tr>
+              <tr>
+                <td data-label="排名"><div><strong>6</strong></div></td>
+                <td class="mname">Doubao-Seed-2.0-Code<span class="ven">字节跳动 · 经火山引擎 Ark 与 Trae</span></td>
+                <td data-label="推荐理由"><div>Trae 用户的顺手之选：字节的编程专长版至今仍是现行版本（Seed 2.1 没有编程版），在 Trae 里开箱即用。排在后面是因为本页来源里没有可比的公开编程基准可核。</div></td>
+                <td data-label="编程基准"><div>未核实到可比的公开数据</div></td>
+                <td data-label="API 价格"><div>未核实到独立 API 价；主要经 Trae 使用（国内版 Lite ¥49/月起）</div></td>
+                <td data-label="上下文"><div>256K</div></td>
+              </tr>
+              <tr>
+                <td data-label="排名"><div><strong>7</strong></div></td>
+                <td class="mname">混元 Hy3<span class="ven">腾讯 · 经腾讯云 TokenHub 与 WorkBuddy / CodeBuddy</span></td>
+                <td data-label="推荐理由"><div>腾讯生态内的顺手之选：TokenHub 价格便宜，又是 Apache-2.0 开源权重可自托管；在 WorkBuddy / CodeBuddy 里直接可用。但编程基准本页未核实到，纯编程场景不如前几名有据可依。</div></td>
+                <td data-label="编程基准"><div>未核实到可比的公开数据</div></td>
+                <td data-label="API 价格"><div>¥1 / ¥4（TokenHub）</div></td>
+                <td data-label="上下文"><div>256K</div></td>
+              </tr>
+              <tr>
+                <td data-label="排名"><div><strong>8</strong></div></td>
+                <td class="mname">ERNIE 5.1<span class="ven">百度 · 经千帆平台，编程产品为 Comate</span></td>
+                <td data-label="推荐理由"><div>暂列末位：仅托管、无开源权重，128K 上下文在编程场景偏小；它发布时的 Arena Search 1,223 是搜索榜、不是编程成绩。Comate 的确切付费价也未证实（见「其他」页）。</div></td>
+                <td data-label="编程基准"><div>无编程口径数据（Arena Search 为搜索榜）</div></td>
+                <td data-label="API 价格"><div>$0.59 / $2.65（二手来源报道）</div></td>
+                <td data-label="上下文"><div>128K</div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tbl-wrap breakout">
+          <table class="cmp-table">
+            <caption>国外大模型 · 编程推荐排序（核查于 2026-11-22；价格为 API 每百万 token 输入 / 输出。除 Hermes 自托管外，均无官方大陆通道）</caption>
+            <thead>
+              <tr>
+                <th>排名</th>
+                <th>模型</th>
+                <th>为什么排在这里</th>
+                <th>编程基准（口径）</th>
+                <th>API 价格</th>
+                <th>上下文</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="排名"><div><strong>1</strong></div></td>
+                <td class="mname">Claude Opus 5.5<span class="ven">Anthropic · 顶配为 Fable 5.2 / Mythos 5.2</span></td>
+                <td data-label="推荐理由"><div>国外编程首选：Anthropic 官方就把 Opus 5.5 定为编程日用主力，Claude Code 生态最成熟；最难的任务再上 11 月 9 日的 Fable 5.2。前提是你有受支持地区的账号与海外卡——官方地区名单里没有中国大陆及港澳。</div></td>
+                <td data-label="编程基准"><div>Terminal-Bench 4.0 66.4%（Moonshot 对比口径）</div></td>
+                <td data-label="API 价格"><div>Opus 5.5 $4 / $20；Fable 5.2 $8 / $40</div></td>
+                <td data-label="上下文"><div>1M（Fable 5.2）</div></td>
+              </tr>
+              <tr>
+                <td data-label="排名"><div><strong>2</strong></div></td>
+                <td class="mname">GPT-5.6 Sol<span class="ven">OpenAI · 经 Codex / API / ChatGPT；同系有 Terra / Luna</span></td>
+                <td data-label="推荐理由"><div>Codex 生态的旗舰：云端 agent、开源 CLI、IDE 插件、PR 审查四件套齐全，包含在 ChatGPT 套餐里。本页未核实到它可比的编程基准数字，按生态与定位排第二。同样官方不支持中国大陆。</div></td>
+                <td data-label="编程基准"><div>未核实到可比的公开数据</div></td>
+                <td data-label="API 价格"><div>$5 / $30（企业费率卡 $4 / $20，口径不一）</div></td>
+                <td data-label="上下文"><div>未核实（仅确认超 272K 输入起加价）</div></td>
+              </tr>
+              <tr>
+                <td data-label="排名"><div><strong>3</strong></div></td>
+                <td class="mname">Gemini 3.8 Flash<span class="ven">Google · 在 Antigravity 中使用；另有 Gemini 3 Flash</span></td>
+                <td data-label="推荐理由"><div>国外里最便宜的一档：1M 上下文、价格只有旗舰的零头，在受支持地区还能用 Antigravity 免费层先试。编程强度定位在 Flash 档，别拿它和前两名的旗舰比硬任务。官方不支持中国大陆。</div></td>
+                <td data-label="编程基准"><div>未核实到可比的公开数据</div></td>
+                <td data-label="API 价格"><div>3.8 Flash $0.75 / $3.75（优惠价至 2026-12-31，之后 $1.50 / $7.50）；3 Flash $0.50 / $3</div></td>
+                <td data-label="上下文"><div>1M</div></td>
+              </tr>
+              <tr>
+                <td data-label="排名"><div><strong>4</strong></div></td>
+                <td class="mname">Hermes 4.3（36B）<span class="ven">Nous Research · 开源权重</span></td>
+                <td data-label="推荐理由"><div>唯一能合法在国内本地跑的国外模型：Apache-2.0 开源权重、自托管免费，权重经 hf-mirror.com 或 ModelScope 下载。编程基准本页未核实到，36B 的规模决定它更适合本地轻量任务和离线场景，排末位是定位问题、不是可用性问题。</div></td>
+                <td data-label="编程基准"><div>未核实到可比的公开数据</div></td>
+                <td data-label="API 价格"><div>自托管 $0</div></td>
+                <td data-label="上下文"><div>512K</div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="src">排序表来源：<a href="https://www.kimi.com/code/en">Kimi Code 官网</a> · <a href="https://z.ai/blog/glm-5.3?ref=runtimewire">Z.ai 官方博客（GLM-5.3）</a> · <a href="https://www.alibabacloud.com/press-room/alibaba-unveils-cutting-edge-ai-coding-model-qwen3">阿里云官方新闻稿（Qwen3-Coder）</a> · <a href="https://www.minimax.io/blog/minimax-m3">MiniMax 官方博客（M3）</a> · <a href="https://www.anthropic.com/claude-fable-and-mythos-5-2?ref=hubwiz.com">Anthropic 官方（Fable / Mythos 5.2）</a> · 其余价格与版本同本页对照表及各专节所引来源。</p>
         <p class="src">本节来源（2026-11-22 核查）：<a href="https://api-docs.deepseek.com/quick_start/pricing/?nb_kwd=best+social+media+ai&amp;nb_mt=p&amp;nb_ti=kwd-2297875758714&amp;scroll_speed=instant">DeepSeek 官方价格页（实测抓取）</a> · <a href="https://help.openai.com/en/articles/7947663-chatgpt-and-openai-api-supported-countries-and-territories">OpenAI 官方支持国家列表</a> · <a href="https://www.anthropic.com/legal/supported-regions">Anthropic 官方支持地区政策</a> · <a href="https://forum.cursor.com/t/introducing-the-x-subscription/174450?page=3">Cursor 官方论坛（X 订阅与支付宝）</a> · <a href="https://discuss.ai.google.dev/t/antigravity-region-eligibility-china-tos-country-japan-google-play-ai-pro-checkout-available/201453">Google 官方论坛（Antigravity 地区资格）</a> · <a href="https://docs.bigmodel.cn/cn/terms/recharge-agreement">智谱官方《充值协议》</a> · <a href="https://platform.kimi.com/docs/guide/account-and-payments">Kimi 官方「账户与支付」</a> · <a href="https://cloud.tencent.com/product/tokenhub">腾讯云 TokenHub 产品页</a> · <a href="https://cloud.tencent.com/document/product/555/7425">腾讯云官方充值文档</a> · <a href="https://www.workbuddy.cn/docs/workbuddy/Pricing">WorkBuddy 官方定价文档</a> · <a href="https://portal.nousresearch.com/compare">Nous Portal 官方对比页</a></p>
       </section>
 
