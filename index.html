@@ -262,6 +262,11 @@
       .follow-fold[open ] .fold-chevron { transform: rotate(180deg); }
       .follow-body { background: var(--bg); border-top: 1px solid var(--line); padding: 6px 20px 20px; }
       .follow-body > p:first-child { margin-top: 14px; }
+      .follow-body ul.tldr-list { margin: 14px 0 6px; padding-left: 1.25em; }
+      .follow-body ul.tldr-list li { margin-bottom: 10px; }
+      .follow-body ul.tldr-list li:last-child { margin-bottom: 4px; }
+      .follow-body .openq-inner { margin-top: 6px; }
+      .follow-body .openq-inner ul.points { margin-top: 8px; }
       @media (max-width: 640px) {
         .follow-fold > summary { padding: 16px 16px; }
         .follow-body { padding: 4px 16px 18px; }
@@ -349,18 +354,6 @@
         <p class="lede">覆盖 DeepSeek 模型与 Harness、Cursor、Codex、Antigravity、WorkBuddy、Hermes 七项。先说最重要的一条：<strong>你说的「DeepSeek V4.1 Flash」是官方正式名</strong>，当前线上版本是 10 月 17 日的检查点 V4.1-Flash-1017，API 模型名 <code>deepseek-flash</code>，也是目前性价比最高的编程模型之一。</p>
       </header>
 
-      <div class="tldr">
-        <h2>速览：只看这五条</h2>
-        <ul>
-          <li><strong>DeepSeek：</strong>旧版 V4-Flash 已在 API 上退役，统一走 <code>deepseek-flash</code>（V4.1-Flash-1017），1M 上下文，非高峰价输入 $0.15 / 输出 $0.60 每百万 token。DeepSeek 还推出了自家编程 agent 运行时 <strong>Harness（<code>dsh</code>）</strong>，但仍是开发者预览版。</li>
-          <li><strong>Cursor：</strong>已变成以 Agents Window 为核心的 Cursor 3；2026 年 10 月起新购个人版改为打包 Grok 的「The X Subscription」，旧 Pro $20 只保留给老用户，切换据称不可逆，动手前先看清。</li>
-          <li><strong>Codex：</strong>模型线已越过 GPT-5-Codex，当前是 GPT-5.6 家族（Sol / Terra / Luna）；Codex 不再有独立订阅，包含在 ChatGPT 套餐里按额度计费。</li>
-          <li><strong>Antigravity：</strong>2.0 扩展为桌面端 / IDE / CLI / SDK 五个面，免费版可直接开始用；Gemini CLI 已于 2026 年 6 月停止服务免费与个人账户，由 Antigravity CLI（<code>agy</code>）取代。</li>
-          <li><strong>WorkBuddy 与 Hermes：</strong>WorkBuddy 是腾讯的办公 agent（不是纯编程 IDE，编程对应的是 CodeBuddy），首发即支持 DeepSeek 并已同步 1017 版；「Hermes」要分清是 Nous 的开源模型（最新 4.3，没有 Hermes 5）还是迭代很快的 Hermes Agent 框架（最新稳定版 v0.23.3）。</li>
-        </ul>
-      </div>
-
-
       <div class="tab-shell">
         <div class="tab-bar" role="tablist" aria-label="按 Agent 切换">
           <button type="button" class="tab-btn" role="tab" id="tab-pay" data-tab="pay" aria-controls="panel-pay" aria-selected="true"><span class="tab-text">对照表<span class="tab-sub">总览 · 默认</span></span></button>
@@ -372,7 +365,7 @@
           <button type="button" class="tab-btn has-update" role="tab" id="tab-workbuddy" data-tab="workbuddy" aria-controls="panel-workbuddy" aria-selected="false" tabindex="-1"><span class="tab-text">WorkBuddy<span class="tab-sub">腾讯</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
           <button type="button" class="tab-btn has-update" role="tab" id="tab-hermes" data-tab="hermes" aria-controls="panel-hermes" aria-selected="false" tabindex="-1"><span class="tab-text">Hermes<span class="tab-sub">Nous</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
         </div>
-        <p class="tab-legend"><span><span class="lg-dot"></span><strong>红点 +「更新」</strong> = 该 Agent 本期有新版本、价格或规则变化，点开后顶部有更新说明；无标记 = 本期无重大变化（本期仅 Codex）。</span><span>另见下方：<a href="#follow">持续跟进</a> · <a href="#open">存疑事项</a></span></p>
+        <p class="tab-legend"><span><span class="lg-dot"></span><strong>红点 +「更新」</strong> = 该 Agent 本期有新版本、价格或规则变化，点开后顶部有更新说明；无标记 = 本期无重大变化（本期仅 Codex）。</span><span>另见下方：<a href="#tldr">速览</a> · <a href="#follow">持续跟进</a> · <a href="#open">存疑事项</a></span></p>
 
       <!-- ============ DeepSeek ============ -->
       <section class="tool tab-panel" id="panel-deepseek" data-panel="deepseek" role="tabpanel" aria-labelledby="tab-deepseek" tabindex="0">
@@ -782,6 +775,25 @@
 
       </div><!-- /tab-shell -->
 
+      <!-- ============ TLDR (folded, above Follow) ============ -->
+      <section class="tool" id="tldr">
+        <details class="follow-fold tldr-fold">
+          <summary aria-label="展开或收起：速览，只看这五条">
+            <span class="follow-title-wrap"><h2 class="follow-title">速览：只看这五条</h2><span class="en">TL;DR</span></span>
+            <span class="follow-toggle"><span class="follow-hint">点击展开</span><span class="fold-chevron" aria-hidden="true">▾</span></span>
+          </summary>
+          <div class="follow-body">
+            <ul class="tldr-list">
+              <li><strong>DeepSeek：</strong>旧版 V4-Flash 已在 API 上退役，统一走 <code>deepseek-flash</code>（V4.1-Flash-1017），1M 上下文，非高峰价输入 $0.15 / 输出 $0.60 每百万 token。DeepSeek 还推出了自家编程 agent 运行时 <strong>Harness（<code>dsh</code>）</strong>，但仍是开发者预览版。</li>
+              <li><strong>Cursor：</strong>已变成以 Agents Window 为核心的 Cursor 3；2026 年 10 月起新购个人版改为打包 Grok 的「The X Subscription」，旧 Pro $20 只保留给老用户，切换据称不可逆，动手前先看清。</li>
+              <li><strong>Codex：</strong>模型线已越过 GPT-5-Codex，当前是 GPT-5.6 家族（Sol / Terra / Luna）；Codex 不再有独立订阅，包含在 ChatGPT 套餐里按额度计费。</li>
+              <li><strong>Antigravity：</strong>2.0 扩展为桌面端 / IDE / CLI / SDK 五个面，免费版可直接开始用；Gemini CLI 已于 2026 年 6 月停止服务免费与个人账户，由 Antigravity CLI（<code>agy</code>）取代。</li>
+              <li><strong>WorkBuddy 与 Hermes：</strong>WorkBuddy 是腾讯的办公 agent（不是纯编程 IDE，编程对应的是 CodeBuddy），首发即支持 DeepSeek 并已同步 1017 版；「Hermes」要分清是 Nous 的开源模型（最新 4.3，没有 Hermes 5）还是迭代很快的 Hermes Agent 框架（最新稳定版 v0.23.3）。</li>
+            </ul>
+          </div>
+        </details>
+      </section>
+
       <!-- ============ Follow ============ -->
       <section class="tool" id="follow">
         <details class="follow-fold">
@@ -834,20 +846,25 @@
         </details>
       </section>
 
-      <!-- ============ Open questions ============ -->
+      <!-- ============ Open questions (folded) ============ -->
       <section class="tool" id="open">
-        <div class="tool-head">
-          <h2>还没证实的事</h2><span class="en">别拿这些做决策</span>
-        </div>
-        <div class="openq">
-          <ul class="points">
-            <li><strong>DeepSeek V4.1-Pro：</strong>9 月时官方称「即将推出」，截至 2026-11-22 未查到发布。目前 Pro 线仍是 V4-Pro-0813。</li>
-            <li><strong>GPT-6 进入 Codex：</strong>只有 OpenAI 企业费率卡一条证据，且限定企业场景；无其他来源佐证它是 CLI 的普遍默认。</li>
-            <li><strong>Antigravity 的 Gemini 4 分层命名</strong>（Hydrogen / Argon / Carbon）：来自 11 月二手汇总，未见 Google 官方博客证实。</li>
-            <li><strong>各家额度无法从公开页面审计：</strong>Cursor 的 X 订阅用量池、Codex 的 credit 计量、Antigravity 未公开数字的每周额度，都没有做应用内实测，本页价格均为公开页面与多家二手来源交叉的结果（DeepSeek 价格页为官方原文抓取）。</li>
-            <li><strong>跑分多为厂商自报：</strong>Composer 2.5、GPT-5-Codex 的「7 小时自主工作」、DeepSeek 的 DeepSWE 等均按厂商口径标注；目前有独立第三方数字的只有 DeepSeek 1017 的 Terminal-Bench（31.82%，且 harness 不同）。</li>
-          </ul>
-        </div>
+        <details class="follow-fold open-fold">
+          <summary aria-label="展开或收起：还没证实的事">
+            <span class="follow-title-wrap"><h2 class="follow-title">还没证实的事</h2><span class="en">别拿这些做决策</span></span>
+            <span class="follow-toggle"><span class="follow-hint">点击展开</span><span class="fold-chevron" aria-hidden="true">▾</span></span>
+          </summary>
+          <div class="follow-body">
+            <div class="openq-inner">
+              <ul class="points">
+                <li><strong>DeepSeek V4.1-Pro：</strong>9 月时官方称「即将推出」，截至 2026-11-22 未查到发布。目前 Pro 线仍是 V4-Pro-0813。</li>
+                <li><strong>GPT-6 进入 Codex：</strong>只有 OpenAI 企业费率卡一条证据，且限定企业场景；无其他来源佐证它是 CLI 的普遍默认。</li>
+                <li><strong>Antigravity 的 Gemini 4 分层命名</strong>（Hydrogen / Argon / Carbon）：来自 11 月二手汇总，未见 Google 官方博客证实。</li>
+                <li><strong>各家额度无法从公开页面审计：</strong>Cursor 的 X 订阅用量池、Codex 的 credit 计量、Antigravity 未公开数字的每周额度，都没有做应用内实测，本页价格均为公开页面与多家二手来源交叉的结果（DeepSeek 价格页为官方原文抓取）。</li>
+                <li><strong>跑分多为厂商自报：</strong>Composer 2.5、GPT-5-Codex 的「7 小时自主工作」、DeepSeek 的 DeepSWE 等均按厂商口径标注；目前有独立第三方数字的只有 DeepSeek 1017 的 Terminal-Bench（31.82%，且 harness 不同）。</li>
+              </ul>
+            </div>
+          </div>
+        </details>
       </section>
 
       <footer>
@@ -977,7 +994,7 @@
         function fromHash() {
           var h = (location.hash || '').replace('#', '');
           if (panels[h]) activate(h, { hash: false });
-          else if (h === 'follow' || h === 'open') { /* leave current tab as-is */ }
+          else if (h === 'follow' || h === 'open' || h === 'tldr') { /* leave current tab as-is */ }
         }
         window.addEventListener('hashchange', fromHash);
         fromHash();
@@ -994,14 +1011,24 @@
     </script>
     <script>
       (function () {
-        var fold = document.querySelector('.follow-fold');
-        if (!fold) return;
-        var hint = fold.querySelector('.follow-hint');
-        function sync() { if (hint) hint.textContent = fold.open ? '点击收起' : '点击展开'; }
-        fold.addEventListener('toggle', sync);
-        sync();
-        // If user jumps via #follow link, expand so the content is visible
-        function checkHash() { if ((location.hash || '') === '#follow' && !fold.open) { fold.open = true; sync(); } }
+        var folds = Array.prototype.slice.call(document.querySelectorAll('.follow-fold'));
+        if (!folds.length) return;
+        folds.forEach(function (fold) {
+          var hint = fold.querySelector('.follow-hint');
+          function sync() { if (hint) hint.textContent = fold.open ? '点击收起' : '点击展开'; }
+          fold.addEventListener('toggle', sync);
+          sync();
+          fold.__syncHint = sync;
+        });
+        // If user jumps via #tldr / #follow / #open link, expand that fold so the content is visible
+        function checkHash() {
+          var h = (location.hash || '').replace('#', '');
+          if (h !== 'tldr' && h !== 'follow' && h !== 'open') return;
+          var sec = document.getElementById(h);
+          if (!sec) return;
+          var fold = sec.querySelector('.follow-fold');
+          if (fold && !fold.open) { fold.open = true; if (fold.__syncHint) fold.__syncHint(); }
+        }
         window.addEventListener('hashchange', checkHash);
         checkHash();
       })();
