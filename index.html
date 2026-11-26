@@ -409,13 +409,13 @@
           <button type="button" class="tab-btn" role="tab" id="tab-deepseek" data-tab="deepseek" aria-controls="panel-deepseek" aria-selected="false" tabindex="-1"><span class="tab-text">DeepSeek<span class="tab-sub">模型</span></span></button>
           <button type="button" class="tab-btn" role="tab" id="tab-harness" data-tab="harness" aria-controls="panel-harness" aria-selected="false" tabindex="-1"><span class="tab-text">Harness<span class="tab-sub">DeepSeek · dsh</span></span></button>
           <button type="button" class="tab-btn" role="tab" id="tab-cursor" data-tab="cursor" aria-controls="panel-cursor" aria-selected="false" tabindex="-1"><span class="tab-text">Cursor<span class="tab-sub">编辑器</span></span></button>
-          <button type="button" class="tab-btn has-update" role="tab" id="tab-codex" data-tab="codex" data-update="2026-11-17" aria-controls="panel-codex" aria-selected="false" tabindex="-1"><span class="tab-text">Codex<span class="tab-sub">OpenAI</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
-          <button type="button" class="tab-btn has-update" role="tab" id="tab-antigravity" data-tab="antigravity" data-update="2026-11-23" aria-controls="panel-antigravity" aria-selected="false" tabindex="-1"><span class="tab-text">Antigravity<span class="tab-sub">Google</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
-          <button type="button" class="tab-btn has-update" role="tab" id="tab-workbuddy" data-tab="workbuddy" data-update="2026-11-20" aria-controls="panel-workbuddy" aria-selected="false" tabindex="-1"><span class="tab-text">WorkBuddy<span class="tab-sub">腾讯</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
+          <button type="button" class="tab-btn" role="tab" id="tab-codex" data-tab="codex" aria-controls="panel-codex" aria-selected="false" tabindex="-1"><span class="tab-text">Codex<span class="tab-sub">OpenAI</span></span></button>
+          <button type="button" class="tab-btn has-update" role="tab" id="tab-antigravity" data-tab="antigravity" data-update="2026-11-30" aria-controls="panel-antigravity" aria-selected="false" tabindex="-1"><span class="tab-text">Antigravity<span class="tab-sub">Google</span></span><span class="tab-dot" aria-hidden="true"></span><span class="tab-new">更新</span></button>
+          <button type="button" class="tab-btn" role="tab" id="tab-workbuddy" data-tab="workbuddy" aria-controls="panel-workbuddy" aria-selected="false" tabindex="-1"><span class="tab-text">WorkBuddy<span class="tab-sub">腾讯</span></span></button>
           <button type="button" class="tab-btn" role="tab" id="tab-hermes" data-tab="hermes" aria-controls="panel-hermes" aria-selected="false" tabindex="-1"><span class="tab-text">Hermes<span class="tab-sub">Nous</span></span></button>
           <button type="button" class="tab-btn" role="tab" id="tab-other" data-tab="other" aria-controls="panel-other" aria-selected="false" tabindex="-1"><span class="tab-text">其他<span class="tab-sub">12 条 · 侧边栏</span></span></button>
         </div>
-        <p class="tab-legend"><span><span class="lg-dot"></span><strong>红点 +「更新」</strong> = 该 Agent 本期有新版本、价格或规则变化，点开看过后标记即消失；无标记 = 本期无重大变化或已看过（本期有更新的仅 Codex、Antigravity、WorkBuddy）。</span><span>另见下方：<a href="#tldr">速览</a> · <a href="#follow">持续跟进</a> · <a href="#open">存疑事项</a></span></p>
+        <p class="tab-legend"><span><span class="lg-dot"></span><strong>红点 +「更新」</strong> = 该 Agent 本期有新版本、价格或规则变化，点开看过后标记即消失；无标记 = 本期无重大变化或已看过（本期有更新的仅 Antigravity）。</span><span>另见下方：<a href="#tldr">速览</a> · <a href="#follow">持续跟进</a> · <a href="#open">存疑事项</a></span></p>
 
       <!-- ============ DeepSeek ============ -->
       <section class="tool tab-panel" id="panel-deepseek" data-panel="deepseek" role="tabpanel" aria-labelledby="tab-deepseek" tabindex="0">
@@ -587,19 +587,19 @@
         <div class="tool-head">
           <h2>Google Antigravity</h2><span class="en">Agent 优先的开发平台</span>
         </div>
-        <p class="verdict">结论：2025 年 11 月随 Gemini 3 发布的「agent 优先」平台，<strong>2026 年 5 月的 2.0 把它扩成了五件套</strong>；没有单独订阅，免费层就能开始用，付费走 Google AI 套餐。2026 年 11 月 18 日起，<strong>默认模型换成 Gemini 4 Neon</strong>，产品版本仍为 2.0。</p>
+        <p class="verdict">结论：2025 年 11 月随 Gemini 3 发布的「agent 优先」平台，<strong>2026 年 5 月的 2.0 把它扩成了五件套</strong>；没有单独订阅，免费层就能开始用，付费走 Google AI 套餐。2026 年 11 月 18 日起，付费版<strong>默认模型换成 Gemini 4 Neon</strong>（免费版默认 <strong>Gemini 4 Hydrogen</strong>），产品版本仍为 2.0。</p>
         <div class="badges">
-          <span class="badge official">默认模型 <b>Gemini 4 Neon</b>（2026-11-18）</span>
+          <span class="badge official">默认模型 <b>Gemini 4 Neon</b>（付费版，2026-11-18；免费版默认 Hydrogen）</span>
           <span class="badge">2.0 发布于 2026-05-19（Google I/O），本期仍为 2.0</span>
           <span class="badge">11 月 12 日二手核查版本：App v2.31.2 / IDE v2.6.0 / CLI <b>agy</b> v1.5.7</span>
           <span class="badge warn">模型阵容月月变，以应用内选择器为准</span>
         </div>
-        <div class="update-banner" role="note"><span class="u-dot" aria-hidden="true"></span><strong>本期有更新</strong><span>默认模型换成 <strong>Gemini 4 Neon</strong>；同期上线 Gemini 4 Carbon / Hydrogen。产品仍为 2.0，没有大版本变化。</span><span class="u-date">2026-11-18</span></div>
+        <div class="update-banner" role="note"><span class="u-dot" aria-hidden="true"></span><strong>本期有更新</strong><span>免费版 <strong>Claude Sonnet / Opus 4.6、GPT-OSS-120b、Gemini 3.8 Flash、Gemini 4 Argon</strong> 将于 <strong>2026-11-30</strong> 下线，之后免费版只剩 <strong>Gemini 4 Hydrogen</strong>（免费版默认模型）；想继续用 Claude 需付费 Google AI Pro（$19.99/月，Sonnet / Opus 5.5）。该日期此前已从 11 月 2 日、11 月 18 日两度推迟。</span><span class="u-date">2026-11-30</span></div>
         <ul class="points">
           <li><strong>五个面：</strong>桌面应用（并行 agent、动态子 agent、定时任务）、IDE、CLI <code>agy</code>、SDK，以及 Gemini API / 企业平台里的 Managed Agents。你扮演架构师/管理者，agent 同时操作编辑器、终端和浏览器。</li>
           <li><strong>Gemini CLI 已退役：</strong>2026 年 6 月 18 日起停止服务免费与个人账户，由 Antigravity CLI 取代——还在用 Gemini CLI 的话需要迁移。</li>
           <li><strong>免费层：</strong>Individual $0，Tab 补全与 Command 不限量，agent 有每周额度（不像付费层每 5 小时刷新）。付费层额度每 5 小时刷新、同时受周上限约束，与 Gemini 共用一个额度池。</li>
-          <li><strong>模型：</strong>发布时是 Gemini 3 Pro + Claude Sonnet 4.5 + GPT-OSS；2026 年 11 月 18 日起<strong>默认模型换成 Gemini 4 Neon</strong>，同期上线 Gemini 4 Carbon / Hydrogen（据官方更新日志）。此前二手汇总里的 Gemini 4 分层命名至此得到官方日志印证；部分第三方模型原定 11 月 2 日下架，实际阵容仍请看应用内选择器。</li>
+          <li><strong>模型：</strong>发布时是 Gemini 3 Pro + Claude Sonnet 4.5 + GPT-OSS；2026 年 11 月 18 日起付费版<strong>默认模型换成 Gemini 4 Neon</strong>，同期上线 Gemini 4 Carbon / Hydrogen（据官方更新日志），免费版默认模型是 <strong>Gemini 4 Hydrogen</strong>。此前二手汇总里的 Gemini 4 分层命名至此得到官方日志印证；<strong>Claude Sonnet / Opus 4.6、GPT-OSS-120b、Gemini 3.8 Flash 与 Gemini 4 Argon 将于 2026 年 11 月 30 日下线</strong>（官方模型页注明，此前日期已两度推迟），下线后免费版只剩 Gemini 4 Hydrogen。</li>
         </ul>
         <div class="tbl-wrap">
           <table>
@@ -612,7 +612,7 @@
             </tbody>
           </table>
         </div>
-        <p class="src">来源：<a href="https://antigravity.google/docs/changelog">Antigravity 官方更新日志（Gemini 4 Neon / Carbon / Hydrogen，2026-11-18）</a> · <a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemini-3-developers/">Google 官方博客（Gemini 3 与 Antigravity 发布）</a> · <a href="https://apidog.com/blog/google-antigravity-2/">Apidog 的 2.0 梳理</a> · <a href="https://www.cloudzero.com/blog/google-antigravity-pricing/">CloudZero 定价汇总</a></p>
+        <p class="src">来源：<a href="https://antigravity.google/docs/models">Antigravity 官方模型页（免费版模型 2026-11-30 下线）</a> · <a href="https://antigravity.google/docs/changelog">Antigravity 官方更新日志（Gemini 4 Neon / Carbon / Hydrogen，2026-11-18）</a> · <a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemini-3-developers/">Google 官方博客（Gemini 3 与 Antigravity 发布）</a> · <a href="https://apidog.com/blog/google-antigravity-2/">Apidog 的 2.0 梳理</a> · <a href="https://www.cloudzero.com/blog/google-antigravity-pricing/">CloudZero 定价汇总</a></p>
       </section>
 
       <!-- ============ WorkBuddy ============ -->
